@@ -42,7 +42,7 @@ export const followUser = (
 
 
 //Unfollow a user
-export const unFollowUser = (
+export const unfollowUser = (
     currentUser,
     otherUserId
 ) => {
