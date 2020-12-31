@@ -6,10 +6,25 @@ import { getCurrentUser } from '../services/auth.service.js'
 import { viewFollowedPosts } from '../services/post.service.js'
 
 const Following = () => {
+    let followedPostData
 
-    let user = getCurrentUser()
+    const user = getCurrentUser()
     console.log(user.id)
 
+    const followingPosts = viewFollowedPosts(user.id)
+
+    async function getPostData() {
+        followedPostData = await followingPosts
+        console.log(followedPostData.data.followed)
+    }
+
+    getPostData()
+
+    /*
+    let followingPosts = viewFollowedPosts(user.id)
+    console.log(followingPosts)
+    console.log(followingPosts)
+    */
 
     return (
         <>
