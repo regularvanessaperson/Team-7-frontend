@@ -35,3 +35,19 @@ export const deletePost = (
         _id
     })
 }
+
+//retweet a post
+export const retweetPost = (
+    creator,
+    body,
+    hashtags,
+    parentPost
+) => {
+    return axios
+    .post(API_URL+"retweet", {
+        creator,
+        body,
+        hashtags,
+        parentPost
+    })
+}
