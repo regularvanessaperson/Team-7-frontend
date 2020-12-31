@@ -95,7 +95,7 @@ export const viewOnePost = (
     idx
 ) => {
     return axios
-    .get(API_URL+":idx")
+    .get(API_URL+idx) 
 }
 
 //increment favorite count of a post
