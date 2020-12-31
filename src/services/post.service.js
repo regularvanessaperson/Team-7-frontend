@@ -25,3 +25,13 @@ export const editPost = (
         body
     })
 }
+
+//delete a post
+export const deletePost = (
+    _id
+) => {
+    return axios
+    .delete(API_URL+"post", {
+        _id
+    })
+}
