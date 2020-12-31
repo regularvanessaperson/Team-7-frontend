@@ -51,3 +51,61 @@ export const retweetPost = (
         parentPost
     })
 }
+
+//reply to a post
+export const replyToPost = (
+    creator,
+    body,
+    hashtags,
+    parentPost
+) => {
+    return axios
+    .post(API_URL+"reply", {
+        creator,
+        body,
+        hashtags,
+        parentPost
+    })
+}
+
+//view favorited posts
+export const viewFavoritePosts = (
+    id
+) => {
+    return axios
+    .get(API_URL+"feed/favorites/"+id)
+}
+
+//view posts from followed users
+export const viewFollowedPosts = (
+    id
+) => {
+    return axios
+    .get(API_URL+"feed/"+id)
+}
+
+//view all posts
+export const viewAllPosts = () => {
+    return axios
+    .get(API_URL+"feed")
+}
+
+//view one post
+export const viewOnePost = (
+    idx
+) => {
+    return axios
+    .get(API_URL+":idx")
+}
+
+//increment favorite count of a post
+export const incrementFavorite = (
+    id,
+    userId
+) => {
+    return axios
+    .put(API_URL+"favorites", {
+        id,
+        userId
+    })
+}
