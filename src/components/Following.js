@@ -12,7 +12,8 @@ const Following = () => {
     const [data, setData] = useState([])
     // initialize state for loader
     const [loading, setLoading] = useState(true)
-
+    //initialize state for users
+    const [users, setUsers] = useState([])
     
     //let followedPostData
 
@@ -32,14 +33,31 @@ const Following = () => {
 
     useEffect(() => {
         let postsArray = []
+        let usersFollowedArray =[]
         viewFollowedPosts(user.id)
         .then(res => {
             console.log(res.data)
             console.log(res.data.followed)
             let followedArray = res.data.followed
             followedArray.map(item => postsArray.push(...item.posts))
+            followedArray.map(item => usersFollowedArray.push(item))
             console.log(postsArray)
+            console.log(usersFollowedArray)
             setData(postsArray)
+            //setUsers(usersFollowedArray)
+        })
+        .then(() =>{
+            console.log(usersFollowedArray)
+            
+            usersFollowedArray.forEach(item => viewFollowedPosts(item._id)
+            .then(res => {
+                console.log(res.data)
+                setUsers([res.data])
+            })
+            )
+
+            
+             
         })
         .then(() => setLoading(false))
     }, [])
@@ -48,14 +66,23 @@ const Following = () => {
         if(loading) {
             return <ButtonSpinner />
         } else {
-            return data.map((post, index) => (
+            return (/*data.map((post, index) => (
                 <div key={post}>
                     <div className="card-content white-text">
                         <p>{post}</p>
                     </div>
                 </div>
             ))
-        }
+            */
+            users.map((user, index) => (
+                <div>
+                    <p>{user.username}</p>
+                    <p>{user.posts[0].body}</p>
+                </div>
+            ))
+            
+            
+        )}
     }
 
     return (
