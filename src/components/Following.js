@@ -65,6 +65,7 @@ const Following = () => {
         </div>
         <div>
             Feed goes here
+            Number of posts: {data.length}
             {display()}
         </div>
         </>
