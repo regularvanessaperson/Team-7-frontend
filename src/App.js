@@ -9,6 +9,7 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Profile from './components/Profile'
 import Favorites from './components/Favorites'
+import Following from './components/Following'
 
 //CSS imports
 import "./css/App.css";
@@ -22,6 +23,7 @@ const App = ()=> {
         <Route exact path ="/register" component={SignUp}/>
         <Route exact path ="/profile" component={Profile} />
         <Route exact path ="/favorites" component={Favorites}/>
+        <Route exact path ="/following" component={Following} />
       </Switch>
       </Layout>
     );
