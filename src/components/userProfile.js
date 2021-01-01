@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Post from './Post'
 
-const userProfile = (props) => {
+const UserProfile = (props) => {
     const [user, setUser] = useState({})
     setUser(props.user)
     return (
@@ -12,7 +12,7 @@ const userProfile = (props) => {
             </div>
             <div>
                 {user.posts.map((post, index) => {
-                    <Post post={post}/>
+                    return <Post post={post}/>
                 })}
             </div>
             {/* Links to followed, follows, favorites */}
@@ -20,4 +20,4 @@ const userProfile = (props) => {
     )
 }
 
-export default userProfile
+export default UserProfile
