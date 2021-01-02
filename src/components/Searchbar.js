@@ -22,8 +22,9 @@ const Searchbar = () => {
         //Search for users first:
         axios.get('http://localhost:8080/api/user/all').
         then(async (response) => {
-            await response.forEach(user => {
+            await response.data.forEach(user => {
                 if (user.username.toUpperCase() === search.toUpperCase()){
+                    console.log("Result found: ", user.username)
                     return <UserResult name={user.username} />
                 }
             })
@@ -32,19 +33,29 @@ const Searchbar = () => {
         })
 
         //Search for tweets by hunting for results in tweet body
-        axios.get('http://localhost:8080/api/post/feed').
-        then((response) => {
-            //simple search, attempt to match full word regardless of case
-            response.forEach(post => {
-                let postArr = post.body.split(" ")
-                for (let i = 0; i < postArr.length; i++){
-                    if (search.toUpperCase() === postArr[i].toUpperCase()){
+        axios
+            .get("http://localhost:8080/api/posts/feed")
+            .then((response) => {
+                //simple search, attempt to match full word regardless of case
+                console.log(response.data);
+                // response.data.forEach(post => {
+                const posts = response.data;
+                posts.forEach((post) => {
+                if (post.body) {
+                    let postArr = post.body.split(" ");
+                    for (let i = 0; i < postArr.length; i++) {
+                    if (search.toUpperCase() === postArr[i].toUpperCase()) {
                         //render a Post component if it passes the search
-                        return <Post post={post}/>
+                        console.log("Result found: ", post);
+                        return <li><Post post={post} /></li>;
+                    }
                     }
                 }
+                });
             })
-        })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     return (
