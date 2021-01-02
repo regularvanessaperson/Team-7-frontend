@@ -22,12 +22,12 @@ const PostForm = () => {
             }
         })
 
-        console.log(localStorage)
 
         axios.post('http://localhost:8080/api/posts/post', {
+        
             // need current users id in the database
             // haven't tested this yet, not exactly sure where we'll store the current user id
-            creator: localStorage.user._id,
+            creator: JSON.parse(localStorage.getItem('user')).id,
             body: post,
             hashtags: hashtags
         }).then(res => {
