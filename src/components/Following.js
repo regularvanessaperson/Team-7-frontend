@@ -42,23 +42,23 @@ const Following = () => {
             followedArray.map(item => postsArray.push(...item.posts))
             followedArray.map(item => usersFollowedArray.push(item))
             console.log(postsArray)
-            console.log(usersFollowedArray)
+            console.log("usersFollowedArray", usersFollowedArray)
             setData(postsArray)
-            // setUsers(usersFollowedArray)
+            setUsers(usersFollowedArray)
         })
-        .then(() =>{
-            console.log(usersFollowedArray)
+        // .then(() =>{
+        //     console.log(usersFollowedArray)
             
-            usersFollowedArray.forEach(item => viewFollowedPosts(item._id)
-            .then(res => {
-                console.log(res.data)
-                setUsers([res.data])
-            })
-            )
+        //     usersFollowedArray.forEach(item => viewFollowedPosts(item._id)
+        //     .then(res => {
+        //         console.log("res.data", res.data)
+        //         setUsers([res.data])
+        //     })
+            // )
 
             
              
-        })
+        // })
         .then(() => setLoading(false))
     }, [])
 
@@ -77,7 +77,7 @@ const Following = () => {
             users.map((user, index) => (
                 //for length of user.posts array, print a div for each post that includes the body of the post and the username of the post's author
                 user.posts.map(post => {
-                    console.log(post)
+                    console.log("post", post)
                     return (<div id={post._id}>
                         <p>{post.body}</p>
                         <p>{user.username}</p>

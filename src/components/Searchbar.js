@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-const axios = require('axios')
 
 //Component Imports
 import UserResult from './UserResult'
 import Post from './Post'
+
+import React, { useState } from 'react'
+const axios = require('axios')
+
 
 const Searchbar = () => {
     const [search, setSearch] = useState("")

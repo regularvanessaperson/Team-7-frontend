@@ -9,6 +9,7 @@ import { replyToPost, incrementFavorite, retweetPost } from '../services/post.se
 
 const Post = (props) => {
     //pass a post object as props
+    console.log("what is props", props)
     const [post, setPost] = useState({})
     //set the post info to state
     setPost(props.post)
