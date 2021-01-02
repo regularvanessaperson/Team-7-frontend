@@ -17,7 +17,15 @@ Link to come
 | As a user, I want to be able to...|
 |-|
 |Write a post that is visible to other users|
-|Follow other users | 
+|Categorize my post using hashtags|
+|Follow and unfollow other users |
+|Favorite posts|
+|Retweet posts|
+|Reply to posts|
+|View a feed of all posts|
+|View a feed of posts from users I follow|
+|View my favorited posts|
+|Search for topics (hashtags)|
 
 # Frontend Tech Stack
 ## Fetching Data
