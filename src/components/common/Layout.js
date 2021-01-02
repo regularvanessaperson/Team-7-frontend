@@ -42,8 +42,8 @@ const Layout = (props) => {
           )}
           {currentUser && (
             <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
+              <Link to={"/following"} className="nav-link">
+                Following
               </Link>
             </li>
           )}

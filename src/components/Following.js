@@ -44,7 +44,7 @@ const Following = () => {
             console.log(postsArray)
             console.log(usersFollowedArray)
             setData(postsArray)
-            //setUsers(usersFollowedArray)
+            // setUsers(usersFollowedArray)
         })
         .then(() =>{
             console.log(usersFollowedArray)
