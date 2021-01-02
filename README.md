@@ -17,6 +17,7 @@ Link to come
 | As a user, I want to be able to...|
 |-|
 |Write a post that is visible to other users|
+|Follow other users | 
 
 # Frontend Tech Stack
 ## Fetching Data
