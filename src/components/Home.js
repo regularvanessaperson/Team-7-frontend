@@ -1,7 +1,10 @@
-
+import PostForm from "./PostForm"
 
 const Home = () => {
-    return <div>HomePage </div>
+    return <div>
+        <h1>Home Page</h1>
+        <PostForm />
+    </div>
     
 }
 

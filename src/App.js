@@ -8,6 +8,7 @@ import Layout from './components/common/Layout'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import Profile from './components/Profile'
+import UserProfile from './components/UserProfile'
 import Favorites from './components/Favorites'
 import Following from './components/Following'
 
@@ -22,6 +23,7 @@ const App = ()=> {
         <Route exact path ="/login" component={Login} />
         <Route exact path ="/register" component={SignUp}/>
         <Route exact path ="/profile" component={Profile} />
+        <Route exact path ="/userProfile" component={UserProfile}/>
         <Route exact path ="/favorites" component={Favorites}/>
         <Route exact path ="/following" component={Following} />
       </Switch>

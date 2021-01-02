@@ -32,6 +32,7 @@ const Favorites = (props) => {
                 </ul>
             ))
         }).then(results=>{
+            console.log("result", results)
             setFavorites(results)
         })
     }

@@ -54,7 +54,15 @@ const Layout = (props) => {
               </Link>
             </li>
           )}
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/userProfile"} className="nav-link">
+                UserProfile
+              </Link>
+            </li>
+          )}
         </div>
+        
         {currentUser ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
