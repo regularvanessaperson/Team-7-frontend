@@ -37,7 +37,7 @@ const Favorites = (props) => {
         })
     }
 
-
+//in case we add loading
     // if (loading) {
     //     return <div>
     //         Loading
