@@ -76,10 +76,20 @@ const Following = () => {
             */
             users.map((user, index) => (
                 //for length of user.posts array, print a div for each post that includes the body of the post and the username of the post's author
+                user.posts.map(post => {
+                    console.log(post)
+                    return (<div id={post._id}>
+                        <p>{post.body}</p>
+                        <p>{user.username}</p>
+                    </div>)
+
+                })
+                /*
                 <div>
                     <p>{user.username}</p>
                     <p>{user.posts[0].body}</p>
                 </div>
+                */
             ))
             
             
