@@ -21,31 +21,16 @@ const Post = (props) => {
     useEffect(() => {
         if (postInfo.creator[0].followers.includes(currentUser.id)){
             setFollows(true)
-            console.log(follows)
         } else {
             setFollows(false)
         }
     }, [])
-
-    const follow = () => {
-        followUser(currentUser.id, postInfo.creator[0]._id)
-        setFollows(true)
-    }
-
-    const unfollow = () => {
-        unfollowUser(currentUser.id, postInfo.creator[0]._id)
-        setFollows(false)
-    }
 
     const deletePage = () => {
         deletePost(postInfo._id)
         setExists(false)
     }
     
-    if (follows === null){
-        return null
-    }
-
     let urlId = '/userProfile/' + postInfo.creator[0]._id
 
     return(  
@@ -58,14 +43,6 @@ const Post = (props) => {
                 
                 {(postInfo.creator[0]._id === currentUser.id) && (
                     <Button label="Delete" handleClick={deletePage} />
-                )}
-
-                {!follows && (
-                    <Button label="Follow" handleClick={follow}/>
-                )}
-
-                {follows && (
-                    <Button label="Unfollow" handleClick={unfollow}/>
                 )}
                 
             </div>
