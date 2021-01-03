@@ -1,26 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import Button from './common/Button'
+
 //Helper
 import { getUserProfile } from '../services/user.service'
 import { getCurrentUser } from '../services/auth.service'
 import Post from './Post'
 import { useParams } from "react-router";
+import { followUser, unfollowUser } from '../services/user.service.js'
+
 
 const UserProfile = (props) => {
     const currentUser = getCurrentUser("")
     const [profile, setProfile] = useState([])
+    const [follows, setFollows] = useState(false)
+
     const {id} = useParams()
     
-
-    useEffect(() => {
+    useEffect( () => {
         userProfile()
-    }, [])
+        checkFollow()
+    }, [follows])
 
-    async function  userProfile() {
+    const follow = () => {
+        followUser(currentUser.id, id)
+        setFollows(true)
+    }
+
+    const unfollow = () => {
+        unfollowUser(currentUser.id, id)
+        setFollows(false)
+    }
+
+    const checkFollow = async () => {
+        let curr = await (await getUserProfile(id)).data.followers
+        console.log(currentUser.id)
+        for (let i = 0; i < curr.length; i++){
+            console.log(curr[i].followers)
+            if (curr[i].followers.includes(currentUser.id)){
+                setFollows(true)
+                console.log("Follows: ", follows)
+            }
+        }
+    }
+    
+
+    async function userProfile() {
         return await getUserProfile(id).then(user => {
             const userInfo = user.data
-            // setProfile(userInfo)
+            console.log(userInfo)
             return (
                 <div>
                     <div>
@@ -28,6 +57,15 @@ const UserProfile = (props) => {
                       <div><Link to={"/favorites"} className="nav-link">Favorites</Link></div>  
                       <div><Link to={"/following"} className="nav-link">Following</Link></div>
                     </div>
+
+                    {!follows && (
+                        <Button label="Follow" handleClick={follow}/>
+                    )}
+
+                    {follows && (
+                        <Button label="Unfollow" handleClick={unfollow}/>
+                    )}
+
                     <div>
                     This user follows:
                     {userInfo.followed.map((followed, index) => {
@@ -75,6 +113,10 @@ const UserProfile = (props) => {
         }).then(info=>{
             setProfile(info)
         })
+    }
+
+    if (follows === null) {
+        return null
     }
 
     return <div>
