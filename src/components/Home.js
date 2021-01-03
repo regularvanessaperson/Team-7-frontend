@@ -19,7 +19,7 @@ const Home = (props) => {
         })
     }, [])
 
-    const postsFeed = posts.map((post, index) => {
+    const postsFeed = posts.reverse().map((post, index) => {
         return <Post post={post} />    
     })
 
