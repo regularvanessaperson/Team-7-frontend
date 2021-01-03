@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getCurrentUser } from '../services/auth.service.js'
 import { Link } from 'react-router-dom'
 
@@ -7,19 +7,25 @@ import { Link } from 'react-router-dom'
 import Button from './common/Button'
 //import services
 import { deletePost,replyToPost, incrementFavorite, retweetPost } from '../services/post.service.js'
-import { followUser } from '../services/user.service.js'
+import { followUser, unfollowUser } from '../services/user.service.js'
 
 
 const Post = (props) => {
-    
-    const currentUser = getCurrentUser()
 
+    const [follows, setFollows] = useState(false)
+
+    const currentUser = getCurrentUser()
     let postInfo = props.post
-    console.log(currentUser.id, postInfo.creator[0]._id)
-    // console.log(postInfo.creator[0].username)
-    // console.log("postInfo.creator[0]._id", postInfo.creator[0]._id)
-    // const sameUserAsPost = postInfo.creator[0]._id === currentUser.id
-  
+
+    useEffect(() => {
+        
+
+        if (postInfo.creator[0].followers.includes('currentUser.id')){
+            setFollows(true)
+        }
+    }, [])
+        
+
     return(   
 
             <div>
@@ -35,6 +41,12 @@ const Post = (props) => {
                     <div>Body: {postInfo.body}</div>
                     <Button label="Follow" handleClick={() => followUser(currentUser.id, postInfo.creator[0]._id)}/>
                     </div>
+                )}
+
+                {follows ? (
+                    <Button label="Follow" handleClick={() => followUser(currentUser.id, postInfo.creator[0]._id)}/>
+                ) : (
+                    <Button label="Unfollow" handleClick={() => unfollowUser(currentUser.id, postInfo.creator[0]._id)}/>
                 )}
                 
             </div>
