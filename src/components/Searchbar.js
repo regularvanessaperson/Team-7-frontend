@@ -2,6 +2,7 @@
 //Component Imports
 import UserResult from './UserResult'
 import Post from './Post'
+import {viewAllPosts} from '../services/post.service.js'
 
 import React, { useState } from 'react'
 const axios = require('axios')
@@ -41,8 +42,7 @@ const Searchbar = () => {
         })
 
         //Search for tweets by hunting for results in tweet body
-        axios
-            .get("http://localhost:8080/api/posts/feed")
+        viewAllPosts()
             .then((response) => {
                 //simple search, attempt to match full word regardless of case
                 // response.data.forEach(post => {
@@ -76,8 +76,9 @@ const Searchbar = () => {
         </form>
         <ul>
             Users:
-            {users.map(result => {
-                return <li>{result.username}</li>
+            {posts.map(result => {
+                console.log("this is the user", result)
+                return <li key={result._id}>{result.creator[0].username}</li>
             })}
         </ul>
         <ul>

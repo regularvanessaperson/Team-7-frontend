@@ -51,3 +51,9 @@ export const unfollowUser = (
         otherUserId
     })
 }
+
+//View all users
+export const all = () => {
+    return axios
+    .get(API_URL+"all")
+}
