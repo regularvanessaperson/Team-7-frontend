@@ -13,16 +13,16 @@ const Home = (props) => {
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/posts/feed').
-        then(async (response) => {
-            await setPosts(response.data)
+        then((response) => {
+            setPosts(response.data)
         }).catch(err => {
             console.log(err)
         })
     }, [])
 
     const postsFeed = posts.map((post, index) => {
-        return <li>{post.body}</li>
-        // return <Post post={post} />
+        // return <li>{post.body}</li>
+        return <Post post={post} />
     })
 
     return <div>
