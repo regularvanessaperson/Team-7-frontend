@@ -76,7 +76,7 @@ const Following = () => {
             */
             users.map((user, index) => (
                 //for length of user.posts array, print a div for each post that includes the body of the post and the username of the post's author
-                user.posts.map(post => {
+                user.posts.reverse().map(post => {
                     console.log("post", post)
                     return (<div id={post._id}>
                         <p>{post.body}</p>
