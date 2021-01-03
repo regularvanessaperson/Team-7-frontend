@@ -13,6 +13,7 @@ import { followUser, unfollowUser } from '../services/user.service.js'
 const Post = (props) => {
 
     const [follows, setFollows] = useState(null)
+    const [exists, setExists] = useState(true)
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
@@ -36,19 +37,25 @@ const Post = (props) => {
         unfollowUser(currentUser.id, postInfo.creator[0]._id)
         setFollows(false)
     }
+
+    const deletePage = () => {
+        deletePost(postInfo._id)
+        setExists(false)
+    }
     
     if (follows === null){
         return null
     }
 
-    return(   
-
+    return(  
+        <div>
+        {exists && (
             <div>
                 <div>Username: {postInfo.creator[0].username}</div>
                 <div>Body: {postInfo.body}</div>
                 
                 {(postInfo.creator[0]._id === currentUser.id) && (
-                    <Button label="Delete" handleClick={() => deletePost(postInfo._id)} />
+                    <Button label="Delete" handleClick={deletePage} />
                 )}
 
                 {!follows && (
@@ -60,7 +67,8 @@ const Post = (props) => {
                 )}
                 
             </div>
-
+        )}
+        </div> 
     )
 
 
