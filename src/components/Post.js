@@ -9,13 +9,16 @@ import { replyToPost, incrementFavorite, retweetPost } from '../services/post.se
 
 const Post = (props) => {
     console.log(props)
-    console.log(props.post)
+    console.log("props.post", props.post)
 
     let postInfo = props.post
 
 
     return(    
-        <div>{postInfo.body}</div>
+        <div>
+           <div>Username: {postInfo.creator[0].username}</div> 
+            <div>Body: {postInfo.body}</div>
+            </div>
     )
 
 

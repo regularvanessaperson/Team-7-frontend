@@ -11,6 +11,7 @@ const UserProfile = () => {
     const [profile, setProfile] = useState([])
     const id = currentUser.id
     console.log("current user status", currentUser.id)
+    console.log("getuserprofile", getUserProfile(id))
 
     useEffect(() => {
         userProfile()
@@ -25,26 +26,40 @@ const UserProfile = () => {
                 <div>
                     <div>
                         {userInfo.username}
-                      <div><Link to="/favorites">Favorites</Link></div>  
+                      <div><Link to={"/favorites"} className="nav-link">Favorites</Link></div>  
+                      <div><Link to={"/following"} className="nav-link">Following</Link></div>
                     </div>
-                    {/* <div>
+                    <div>
                     This user follows:
                     {userInfo.followed.map((followed, index) => {
+                        if (followed.length === 0){
+                            return <div>You are not following anyone yet.</div>
+                   
+                        }else {
                             return  <ul>
-                                     <li key={index}>{followed.id}</li>
-                                </ul>
-                            // return <Post post={post} />
+                            <li key={index}>{followed.username}</li>
+                            {/* // return <Post post={post} /> */}
+                       </ul>
+                            
+                        }
+                            
                         })}
                     </div>
                     <div>
                     This user is being followed by:
                     {userInfo.followers.map((followers, index) => {
-                            return  <ul>
-                                     <li key={index}>{followers.id}</li>
-                                </ul>
-                            // return <Post post={post} />
+                        if (followers.length === 0){
+                            return <div>You have no followers yet.</div>
+                        }else {
+                            return  <div>
+                            <ul>
+                            <li key={index}>{followers.username}</li>
+                            {/* // return <Post post={post} /> */}
+                       </ul>
+                            </div>
+                        }
                         })}
-                    </div> */}
+                    </div>
                     <div>
                         User Posts:
                         {userInfo.posts.map((post, index) => {
