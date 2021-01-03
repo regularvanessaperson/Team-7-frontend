@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 //Component imports
 import Button from './common/Button'
 //import services
-import { deletePost,replyToPost, incrementFavorite, retweetPost } from '../services/post.service.js'
+import { deletePost,replyToPost, incrementFavorite, decreaseFavorite, retweetPost } from '../services/post.service.js'
 import { followUser, unfollowUser } from '../services/user.service.js'
 
 
@@ -15,6 +15,7 @@ const Post = (props) => {
     const [follows, setFollows] = useState(null)
     const [exists, setExists] = useState(true)
     const [favorites, setFavorites] = useState(0)
+    const [userFave, setUserFave] = useState(false)
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
@@ -26,6 +27,15 @@ const Post = (props) => {
         } else {
             setFollows(false)
         }
+        if (postInfo.favoritedBy.includes(currentUser.id)){
+            setUserFave(true)
+        } else {
+            setUserFave(false)
+        }
+
+        let numFaves = postInfo.favorites
+        setFavorites(numFaves)
+
     }, [])
 
     const deletePage = () => {
@@ -34,13 +44,24 @@ const Post = (props) => {
     }
 
     const favorite = () => {
-        incrementFavorite(postInfo._id)
+        incrementFavorite(postInfo._id, currentUser.id)
         let currentFav = favorites
+        setUserFave(true)
         setFavorites(currentFav + 1)
     }
 
+    const unfavorite = () => {
+        decreaseFavorite(postInfo._id, currentUser.id)
+        let currentFav = favorites
+        setUserFave(false)
+        setFavorites(currentFav - 1)
+    }
     
     let urlId = '/userProfile/' + postInfo.creator[0]._id
+    console.log("UserFave: ", userFave)
+
+
+
 
     return(  
         <div>
@@ -56,7 +77,14 @@ const Post = (props) => {
                 <div>
                 favorites: {favorites}
                 </div>
-                <Button label="Favorite" handleClick={favorite} />
+
+                {!userFave && (
+                        <Button label="Favorite" handleClick={favorite}/>
+                    )}
+
+                {userFave && (
+                    <Button label="Unfavorite" handleClick={unfavorite}/>
+                )}
                 
             </div>
         )}
