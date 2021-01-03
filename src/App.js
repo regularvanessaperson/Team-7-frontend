@@ -23,7 +23,7 @@ const App = ()=> {
         <Route exact path ="/login" component={Login} />
         <Route exact path ="/register" component={SignUp}/>
         <Route exact path ="/profile" component={Profile} />
-        <Route exact path ="/userProfile" component={UserProfile}/>
+        <Route exact path ="/userProfile/:id" component={UserProfile}/>
         <Route exact path ="/favorites" component={Favorites}/>
         <Route exact path ="/following" component={Following} />
       </Switch>

@@ -47,11 +47,14 @@ const Post = (props) => {
         return null
     }
 
+    let urlId = '/userProfile/' + postInfo.creator[0]._id
+
     return(  
         <div>
         {exists && (
             <div>
-                <div>Username: {postInfo.creator[0].username}</div>
+                <Link to={urlId}>{postInfo.creator[0].username}</Link>
+                {/* <div>Username: {postInfo.creator[0].username}</div> */}
                 <div>Body: {postInfo.body}</div>
                 
                 {(postInfo.creator[0]._id === currentUser.id) && (
