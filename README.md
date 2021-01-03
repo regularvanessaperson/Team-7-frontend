@@ -4,6 +4,7 @@ The core functionality of our app is a user's ability to make posts and interact
 In terms of building the app, we focused our energies on building the backend first and then building connections from the frontend to the backend. In short, we had to translate the key functionalities we identified in the planning stage into code and define how these functionalities interacted with our backend.
 
 # Screenshot of Landing Page
+To come
 
 # Link to Deployed App
 Link to come
@@ -12,6 +13,7 @@ Link to come
 [Here](https://github.com/SFX818/Team-7-backend) is a link to our backend repo
 
 # Wireframes
+To come
 
 # User Stories
 | As a user, I want to be able to...|
