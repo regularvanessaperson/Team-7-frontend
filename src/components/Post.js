@@ -12,41 +12,51 @@ import { followUser, unfollowUser } from '../services/user.service.js'
 
 const Post = (props) => {
 
-    const [follows, setFollows] = useState(false)
+    const [follows, setFollows] = useState(null)
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
 
     useEffect(() => {
-        
-
-        if (postInfo.creator[0].followers.includes('currentUser.id')){
+        console.log(postInfo.creator[0], currentUser)
+        if (postInfo.creator[0].followers.includes(currentUser.id)){
             setFollows(true)
+            console.log(follows)
+        } else {
+            setFollows(false)
         }
     }, [])
-        
+
+    const follow = () => {
+        followUser(currentUser.id, postInfo.creator[0]._id)
+        setFollows(true)
+    }
+
+    const unfollow = () => {
+        unfollowUser(currentUser.id, postInfo.creator[0]._id)
+        setFollows(false)
+    }
+    
+    if (follows === null){
+        return null
+    }
 
     return(   
 
             <div>
+                <div>Username: {postInfo.creator[0].username}</div>
+                <div>Body: {postInfo.body}</div>
                 
-                {(postInfo.creator[0]._id === currentUser.id) ? (
-                    <div>
-                    <div>Username: {postInfo.creator[0].username}</div>
-                    <div>Body: {postInfo.body}</div>
+                {(postInfo.creator[0]._id === currentUser.id) && (
                     <Button label="Delete" handleClick={() => deletePost(postInfo._id)} />
-                    </div>
-                ) : (<div>
-                    <div>Username: {postInfo.creator[0].username}</div>
-                    <div>Body: {postInfo.body}</div>
-                    <Button label="Follow" handleClick={() => followUser(currentUser.id, postInfo.creator[0]._id)}/>
-                    </div>
                 )}
 
-                {follows ? (
-                    <Button label="Follow" handleClick={() => followUser(currentUser.id, postInfo.creator[0]._id)}/>
-                ) : (
-                    <Button label="Unfollow" handleClick={() => unfollowUser(currentUser.id, postInfo.creator[0]._id)}/>
+                {!follows && (
+                    <Button label="Follow" handleClick={follow}/>
+                )}
+
+                {follows && (
+                    <Button label="Unfollow" handleClick={unfollow}/>
                 )}
                 
             </div>
