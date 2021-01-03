@@ -7,13 +7,15 @@ import { Link } from 'react-router-dom'
 import Button from './common/Button'
 //import services
 import { deletePost,replyToPost, incrementFavorite, retweetPost } from '../services/post.service.js'
+import { followUser } from '../services/user.service.js'
+
 
 const Post = (props) => {
-    console.log(props)
     
     const currentUser = getCurrentUser()
-    console.log(currentUser)
+
     let postInfo = props.post
+    console.log(currentUser.id, postInfo.creator[0]._id)
     // console.log(postInfo.creator[0].username)
     // console.log("postInfo.creator[0]._id", postInfo.creator[0]._id)
     // const sameUserAsPost = postInfo.creator[0]._id === currentUser.id
@@ -31,7 +33,7 @@ const Post = (props) => {
                 ) : (<div>
                     <div>Username: {postInfo.creator[0].username}</div>
                     <div>Body: {postInfo.body}</div>
-                    <Button label="Follow" />
+                    <Button label="Follow" handleClick={() => followUser(currentUser.id, postInfo.creator[0]._id)}/>
                     </div>
                 )}
                 
