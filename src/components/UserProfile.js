@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 import { getUserProfile } from '../services/user.service'
 import { getCurrentUser } from '../services/auth.service'
 import Post from './Post'
+import { useParams } from "react-router";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
     const currentUser = getCurrentUser("")
     const [profile, setProfile] = useState([])
-    const id = currentUser.id
+    const {id} = useParams()
     
 
     useEffect(() => {
