@@ -12,9 +12,10 @@ const Post = (props) => {
     console.log(props)
     
     const currentUser = getCurrentUser()
-    console.log(currentUser.id)
+    console.log(currentUser)
     let postInfo = props.post
-    console.log("postInfo.creator[0]._id", postInfo.creator[0]._id)
+    // console.log(postInfo.creator[0].username)
+    // console.log("postInfo.creator[0]._id", postInfo.creator[0]._id)
     // const sameUserAsPost = postInfo.creator[0]._id === currentUser.id
   
     return(   

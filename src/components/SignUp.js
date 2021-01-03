@@ -12,6 +12,10 @@ import ButtonSpinner from './common/ButtonSpinner'
 import { register } from '../services/auth.service'
 import {resMessage} from '../utilities/functions.utilities'
 
+import {login} from '../services/auth.service'
+
+const axios = require('axios')
+
 //Function given to react-validator
 const required = (value) => {
     if (!value) {
@@ -101,6 +105,14 @@ const SignUp = (props) => {
                 (response) => {
                     setMessage(response.data.message)
                     setSuccessful(true)
+                    
+                    //if successful, login the new user and redirect to home page
+                    login(username, password).then(
+                        () => {
+                            props.history.push("/profile")
+                            window.location.reload()
+                        }
+                    )
                 },
                 (error) => {
                     setMessage(resMessage(error))
