@@ -8,9 +8,9 @@ const Layout = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
 
 
-  useEffect(async () => {
+  useEffect(() => {
     // grab getCurrentuser from the auth service
-    const user = await getCurrentUser();
+    const user =  getCurrentUser();
 
     if (user) {
       // Set current user to the currentUser state
@@ -26,15 +26,12 @@ const Layout = (props) => {
   }
 
   
-  // let profUrl = '/userProfile/' + currentUser.id
+  let profUrl = null
 
-  if (currentUser === undefined){
-    return null
-  } else {
+  if (currentUser){
     console.log('/userProfile/' + currentUser.id)
+    profUrl = '/userProfile/' + currentUser.id
   }
-
-  let profUrl = '/userProfile/' + currentUser.id
 
   return (
     <div>

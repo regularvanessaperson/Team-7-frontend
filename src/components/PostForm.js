@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-const axios = require('axios')
+import { getCurrentUser } from '../services/auth.service.js'
+import {newPost} from '../services/post.service.js'
 
 const PostForm = () => {
 
+    const currentUser = getCurrentUser()
     const [post, setPost] = useState("")
 
     const onChangePost = (e) => {
@@ -22,31 +24,23 @@ const PostForm = () => {
             }
         })
 
-
-        axios.post('http://localhost:8080/api/posts/post', {
-        
-            // need current users id in the database
-            creator: JSON.parse(localStorage.getItem('user')).id,
-            body: post,
-            hashtags: hashtags
-        }).then(res => {
-            console.log('Post created')
-            //Do we need a redirect here? Or will the feed just rerender
-            // res.redirect('/')
-        }).catch(err => {
-            console.log(err)
-        })
+        newPost(currentUser.id, post, hashtags)
     }
 
     return (
-        <form onSubmit={handlePost}>
+        <div>
+        {(currentUser) && (
+            <form onSubmit={handlePost}>
             <label>
             Write a post:
             <input type="text" value={post} onChange={onChangePost} />
             </label>
             <input type="submit" value="Submit" />
         </form>
-    )
+        
+        )}
+        </div>
+        )
 }
 
 export default PostForm

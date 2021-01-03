@@ -21,7 +21,7 @@ const Post = (props) => {
     console.log(postInfo)
 
     useEffect(() => {
-        if (postInfo.creator[0].followers.includes(currentUser.id)){
+        if (currentUser && postInfo.creator[0].followers.includes(currentUser.id)){
             setFollows(true)
         } else {
             setFollows(false)
@@ -50,7 +50,7 @@ const Post = (props) => {
                 {/* <div>Username: {postInfo.creator[0].username}</div> */}
                 <div>Body: {postInfo.body}</div>
                 
-                {(postInfo.creator[0]._id === currentUser.id) && (
+                {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
                     <Button label="Delete" handleClick={deletePage} />
                 )}
                 <div>
