@@ -56,7 +56,7 @@ const Login = (props) => {
         if(checkBtn.current.context._errors.length === 0){
             login(username, password).then(
                 () => {
-                    props.history.push("/profile")
+                    props.history.push("/home")
                     window.location.reload()
                 },
                 (error) => {

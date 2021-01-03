@@ -109,7 +109,7 @@ const SignUp = (props) => {
                     //if successful, login the new user and redirect to home page
                     login(username, password).then(
                         () => {
-                            props.history.push("/profile")
+                            props.history.push("/home")
                             window.location.reload()
                         }
                     )
