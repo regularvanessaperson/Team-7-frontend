@@ -7,12 +7,15 @@ const Layout = (props) => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
-  useEffect(() => {
+
+  useEffect(async () => {
     // grab getCurrentuser from the auth service
-    const user = getCurrentUser();
+    const user = await getCurrentUser();
+
     if (user) {
       // Set current user to the currentUser state
       setCurrentUser(user);
+
       // Check if the user.roles has "ROLE_ADMIN" return either true or false
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
@@ -21,6 +24,18 @@ const Layout = (props) => {
   const logOut = () => {
     logout()
   }
+
+  
+  // let profUrl = '/userProfile/' + currentUser.id
+
+  if (currentUser === undefined){
+    return null
+  } else {
+    console.log('/userProfile/' + currentUser.id)
+  }
+
+  let profUrl = '/userProfile/' + currentUser.id
+
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -56,7 +71,7 @@ const Layout = (props) => {
           )}
           {currentUser && (
             <li className="nav-item">
-              <Link to={"/userProfile"} className="nav-link">
+              <Link to={profUrl} className="nav-link">
                 UserProfile
               </Link>
             </li>

@@ -19,7 +19,6 @@ const Post = (props) => {
     let postInfo = props.post
 
     useEffect(() => {
-        console.log(postInfo.creator[0], currentUser)
         if (postInfo.creator[0].followers.includes(currentUser.id)){
             setFollows(true)
             console.log(follows)
