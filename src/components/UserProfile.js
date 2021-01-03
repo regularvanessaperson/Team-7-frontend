@@ -10,8 +10,7 @@ const UserProfile = () => {
     const currentUser = getCurrentUser("")
     const [profile, setProfile] = useState([])
     const id = currentUser.id
-    console.log("current user status", currentUser.id)
-    console.log("getuserprofile", getUserProfile(id))
+    
 
     useEffect(() => {
         userProfile()
@@ -19,7 +18,6 @@ const UserProfile = () => {
 
     async function  userProfile() {
         return await getUserProfile(id).then(user => {
-            console.log("the object", user.data)
             const userInfo = user.data
             // setProfile(userInfo)
             return (
@@ -32,13 +30,13 @@ const UserProfile = () => {
                     <div>
                     This user follows:
                     {userInfo.followed.map((followed, index) => {
-                        if (followed.length === 0){
+                        if (followed === null){
                             return <div>You are not following anyone yet.</div>
                    
                         }else {
                             return  <ul>
                             <li key={index}>{followed.username}</li>
-                            {/* // return <Post post={post} /> */}
+                            {/* return <Post post={post} /> */}
                        </ul>
                             
                         }
