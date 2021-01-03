@@ -109,7 +109,19 @@ export const incrementFavorite = (
     userId
 ) => {
     return axios
-    .put(API_URL+"favorites", {
+    .put(API_URL+"favorite", {
+        id,
+        userId
+    })
+}
+
+//decrease favorites and remove user from post doc
+export const decreaseFavorite = (
+    id,
+    userId
+) => {
+    return axios
+    .put(API_URL+"decreaseFave", {
         id,
         userId
     })
