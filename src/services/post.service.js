@@ -31,9 +31,13 @@ export const editPost = (
 export const deletePost = (
     _id
 ) => {
+    console.log("this should be the id for axios", _id)
     return axios
     .delete(API_URL+"post", {
-        _id
+        data: {
+            _id: _id
+        }
+       
     })
 }
 

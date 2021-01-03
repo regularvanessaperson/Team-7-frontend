@@ -1,24 +1,41 @@
 import React, { useState } from 'react'
+import { getCurrentUser } from '../services/auth.service.js'
 import { Link } from 'react-router-dom'
 
 
 //Component imports
 import Button from './common/Button'
 //import services
-import { replyToPost, incrementFavorite, retweetPost } from '../services/post.service.js'
+import { deletePost,replyToPost, incrementFavorite, retweetPost } from '../services/post.service.js'
 
 const Post = (props) => {
     console.log(props)
-    console.log("props.post", props.post)
-
+    
+    const currentUser = getCurrentUser()
+    console.log(currentUser.id)
     let postInfo = props.post
+    console.log("postInfo.creator[0]._id", postInfo.creator[0]._id)
+    // const sameUserAsPost = postInfo.creator[0]._id === currentUser.id
+  
+    return(   
 
-
-    return(    
-        <div>
-           <div>Username: {postInfo.creator[0].username}</div> 
-            <div>Body: {postInfo.body}</div>
+            <div>
+                
+                {(postInfo.creator[0]._id === currentUser.id) ? (
+                    <div>
+                    <div>Username: {postInfo.creator[0].username}</div>
+                    <div>Body: {postInfo.body}</div>
+                    <Button label="Delete" handleClick={() => deletePost(postInfo._id)} />
+                    </div>
+                ) : (<div>
+                    <div>Username: {postInfo.creator[0].username}</div>
+                    <div>Body: {postInfo.body}</div>
+                    <Button label="Follow" />
+                    </div>
+                )}
+                
             </div>
+
     )
 
 
@@ -58,5 +75,5 @@ const Post = (props) => {
     // </div>
 }
 
-export default Post 
+export default Post
 
