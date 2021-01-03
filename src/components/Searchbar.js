@@ -9,25 +9,33 @@ const axios = require('axios')
 
 const Searchbar = () => {
     const [search, setSearch] = useState("")
+    const [users, setUsers] = useState([])
+    const [posts, setPosts] = useState([])
+    const [text, setText] = useState(false)
 
     //Update search state as user types
     const onChangeSearch = (e) => {
         const searchQuery = e.target.value
         setSearch(searchQuery)
+        setUsers([])
+        setPosts([])
+        setText(false)
     }
 
     const handleSearch = (e) => {
+        setText(true)
         e.preventDefault()
         //Need to use the input string to search for tweets and users
         //Search for users first:
         axios.get('http://localhost:8080/api/user/all').
         then(async (response) => {
-            await response.data.forEach(user => {
-                if (user.username.toUpperCase() === search.toUpperCase()){
+            
+             await response.data.forEach(user => {
+                if ((user.username.toUpperCase() === search.toUpperCase()) && !text){
                     console.log("Result found: ", user.username)
-                    return <UserResult name={user.username} />
+                    setUsers([user, ...users])
                 }
-            })
+        })
         }).catch(err => {
             console.log(err)
         })
@@ -37,17 +45,16 @@ const Searchbar = () => {
             .get("http://localhost:8080/api/posts/feed")
             .then((response) => {
                 //simple search, attempt to match full word regardless of case
-                console.log(response.data);
                 // response.data.forEach(post => {
-                const posts = response.data;
-                posts.forEach((post) => {
+                const postResults = response.data;
+                postResults.forEach((post) => {
                 if (post.body) {
                     let postArr = post.body.split(" ");
                     for (let i = 0; i < postArr.length; i++) {
-                    if (search.toUpperCase() === postArr[i].toUpperCase()) {
+                    if ((search.toUpperCase() === postArr[i].toUpperCase()) && !text) {
                         //render a Post component if it passes the search
                         console.log("Result found: ", post);
-                        return <li><Post post={post} /></li>;
+                        setPosts([post, ...posts])
                     }
                     }
                 }
@@ -59,6 +66,7 @@ const Searchbar = () => {
     }
 
     return (
+        <div>
         <form onSubmit={handleSearch}>
             <label>
             Search:
@@ -66,6 +74,20 @@ const Searchbar = () => {
             </label>
             <input type="submit" value="Submit" />
         </form>
+        <ul>
+            Users:
+            {users.map(result => {
+                return <li>{result.username}</li>
+            })}
+        </ul>
+        <ul>
+            Posts:
+            {posts.map(post => {
+                return <li>{post.body}</li>
+            })}
+        </ul>
+        
+        </div>
     )
 }
 
