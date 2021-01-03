@@ -14,9 +14,11 @@ const Post = (props) => {
 
     const [follows, setFollows] = useState(null)
     const [exists, setExists] = useState(true)
+    const [favorites, setFavorites] = useState(0)
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
+    console.log(postInfo)
 
     useEffect(() => {
         if (postInfo.creator[0].followers.includes(currentUser.id)){
@@ -30,6 +32,13 @@ const Post = (props) => {
         deletePost(postInfo._id)
         setExists(false)
     }
+
+    const favorite = () => {
+        incrementFavorite(postInfo._id)
+        let currentFav = favorites
+        setFavorites(currentFav + 1)
+    }
+
     
     let urlId = '/userProfile/' + postInfo.creator[0]._id
 
@@ -44,6 +53,10 @@ const Post = (props) => {
                 {(postInfo.creator[0]._id === currentUser.id) && (
                     <Button label="Delete" handleClick={deletePage} />
                 )}
+                <div>
+                favorites: {favorites}
+                </div>
+                <Button label="Favorite" handleClick={favorite} />
                 
             </div>
         )}

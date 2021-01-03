@@ -20,10 +20,7 @@ const Home = (props) => {
     }, [])
 
     const postsFeed = posts.map((post, index) => {
-        // return <li>{post.body}</li>
-        return <Post post={post} />
-        // return <li key={post._id}>{post.body}</li>
-        // return <Post post={post} />
+        return <Post post={post} />    
     })
 
     return <div>
