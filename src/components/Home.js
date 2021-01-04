@@ -14,12 +14,14 @@ const Home = (props) => {
         viewAllPosts().
         then((response) => {
             setPosts(response.data)
+            console.log("Posts: ", posts)
         }).catch(err => {
             console.log(err)
         })
     }, [])
-
+    
     const postsFeed = posts.reverse().map((post, index) => {
+        console.log(post)
         return <Post post={post} />    
     })
 
