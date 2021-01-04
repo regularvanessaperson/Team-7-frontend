@@ -18,8 +18,14 @@ const Post = (props) => {
     const [favorites, setFavorites] = useState(0)
     const [userFave, setUserFave] = useState(false)
     const [edit, setEdit] = useState(false)
+    //stores original posters username to display above body
+    const [original, setOriginal] = useState(null)
+    // checks to see if the post has been retweeted by current user
     const [retweeted, setRetweeted] = useState(false)
-    const [reposter, setReposter] = useState("")
+    // stores if a post is a repost
+    const [repost, setRepost] = useState(false)
+    // Number of retweets a post has
+    const [numretweet, setNumretweet] = useState(0)
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
@@ -38,16 +44,16 @@ const Post = (props) => {
         }
         if (postInfo.repostedBy.includes(currentUser.id)){
             setRetweeted(true)
-            getUserProfile(postInfo.repostedBy[0]).then(response => {
-                // console.log(user)
-                let user = response.data
-                setReposter(user.username)
-                console.log(user.username, reposter)
-            })
-        } else {
+            }
+        else {
             setRetweeted(false)
         }
-
+        if (postInfo.isRepost) {
+            setOriginal(postInfo.originalCreator)
+            setRepost(true)
+        }
+        let retweets = postInfo.repostedBy.length
+        setNumretweet(retweets)
         let numFaves = postInfo.favorites
         setFavorites(numFaves)
 
@@ -64,14 +70,15 @@ const Post = (props) => {
     }
 
     const retweet = () => {
-        retweetPost(currentUser.id, postInfo.body, currentUser.id, postInfo.hashtags, postInfo._id)
-        setReposter(currentUser.username)
+        retweetPost(currentUser.id, postInfo.body, postInfo.hashtags, postInfo._id, postInfo.creator[0].username)
+        setNumretweet(numretweet + 1)
         setRetweeted(true)
     }
 
     const unretweet = () => {
         unretweetPost(currentUser.id, postInfo.parentPost, postInfo._id)
-        setRetweeted(false)
+        setNumretweet(numretweet - 1)
+        setRepost(false)
     }
 
     const favorite = () => {
@@ -109,8 +116,12 @@ const Post = (props) => {
 
             {exists && (
                 <div>
+                    {original && (
+                    <div>Original by: {original}</div>
+                    )}
+
                     {retweeted && (
-                    <div>Retweeted by: {reposter}</div>
+                        <div>Retweets: {numretweet}</div>
                     )}
 
                     <Link to={urlId}>{postInfo.creator[0].username}</Link>
@@ -118,8 +129,15 @@ const Post = (props) => {
                     
                     {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
                         <div>
-                        <Button label="Delete" handleClick={deletePage} />
-                        <Button label="Edit" handleClick={editPost} />
+                        {original && (
+                            <Button label="Un-retweet" handleClick={unretweet} />
+                        )}
+                        {!original && (
+                            <div>
+                            <Button label="Delete" handleClick={deletePage} />
+                            <Button label="Edit" handleClick={editPost} />
+                            </div>
+                        )}
                         </div>
                     )}
                     <div>
@@ -134,11 +152,7 @@ const Post = (props) => {
                         <Button label="Unfavorite" handleClick={unfavorite}/>
                     )}
 
-                    {retweeted && (
-                        <Button label="Un-retweet" handleClick={unretweet}/>
-                    )}
-
-                    {!retweeted && (
+                    {(!retweeted && !original && !repost) && (
                         <Button label="Retweet" handleClick={retweet} />
                     )}
                 </div>)}
