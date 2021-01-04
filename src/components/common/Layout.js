@@ -35,11 +35,11 @@ const Layout = (props) => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand sticky-top navbar-dark bg-primary">
         <Link to="/" className="navbar-brand">
-          Cool Site
+          Chirper
         </Link>
-        <div className="navbar-nav mr-auto">
+        <div className="navbar-nav nav-tabs mr-auto">
           <li className="nav-item">
             <Link to={"/home"} className="nav-link">
               Home
@@ -47,7 +47,7 @@ const Layout = (props) => {
           </li>
           {showAdminBoard && (
             <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
+              <Link to={"/admin"} className="nav-link active" aria-current="page">
                 Admin Board
               </Link>
             </li>
