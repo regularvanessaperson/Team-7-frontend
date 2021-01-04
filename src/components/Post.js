@@ -69,16 +69,19 @@ const Post = (props) => {
         setExists(false)
     }
 
-    const retweet = () => {
-        retweetPost(currentUser.id, postInfo.body, postInfo.hashtags, postInfo._id, postInfo.creator[0].username)
+    const retweet = async () => {
+        await retweetPost(currentUser.id, postInfo.body, postInfo.hashtags, postInfo._id, postInfo.creator[0].username)
         setNumretweet(numretweet + 1)
         setRetweeted(true)
+        props.rerenderHome()
     }
 
-    const unretweet = () => {
-        unretweetPost(currentUser.id, postInfo.parentPost, postInfo._id)
+    const unretweet = async () => {
+        await unretweetPost(currentUser.id, postInfo.parentPost, postInfo._id)
         setNumretweet(numretweet - 1)
         setRepost(false)
+        props.rerenderHome()
+        setExists(false)
     }
 
     const favorite = () => {
