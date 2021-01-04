@@ -47,6 +47,7 @@ export const deletePost = (
 export const retweetPost = (
     creator,
     body,
+    reposter,
     hashtags,
     parentPost
 ) => {
@@ -54,8 +55,23 @@ export const retweetPost = (
     .post(API_URL+"retweet", {
         creator,
         body,
+        reposter,
         hashtags,
         parentPost
+    })
+}
+
+//unretweet a post
+export const unretweetPost = (
+    userId,
+    parentId,
+    repostId
+) => {
+    return axios
+    .put(API_URL+"unretweet", {
+        userId,
+        parentId,
+        repostId
     })
 }
 

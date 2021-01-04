@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 import Button from './common/Button'
 import EditPost from './EditPost'
 //import services
-import { deletePost,replyToPost, incrementFavorite, decreaseFavorite, retweetPost } from '../services/post.service.js'
-import { followUser, unfollowUser } from '../services/user.service.js'
+import { deletePost,replyToPost, incrementFavorite, decreaseFavorite, retweetPost, unretweetPost } from '../services/post.service.js'
+import { getUserProfile } from '../services/user.service.js'
 
 
 const Post = (props) => {
@@ -18,10 +18,11 @@ const Post = (props) => {
     const [favorites, setFavorites] = useState(0)
     const [userFave, setUserFave] = useState(false)
     const [edit, setEdit] = useState(false)
+    const [retweeted, setRetweeted] = useState(false)
+    const [reposter, setReposter] = useState("")
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
-    console.log(postInfo)
     let favoritesComponent = props.favoritesComponent
 
     useEffect(() => {
@@ -34,6 +35,17 @@ const Post = (props) => {
             setUserFave(true)
         } else {
             setUserFave(false)
+        }
+        if (postInfo.repostedBy.includes(currentUser.id)){
+            setRetweeted(true)
+            getUserProfile(postInfo.repostedBy[0]).then(response => {
+                // console.log(user)
+                let user = response.data
+                setReposter(user.username)
+                console.log(user.username, reposter)
+            })
+        } else {
+            setRetweeted(false)
         }
 
         let numFaves = postInfo.favorites
@@ -49,6 +61,17 @@ const Post = (props) => {
     const deletePage = () => {
         deletePost(postInfo._id)
         setExists(false)
+    }
+
+    const retweet = () => {
+        retweetPost(currentUser.id, postInfo.body, currentUser.id, postInfo.hashtags, postInfo._id)
+        setReposter(currentUser.username)
+        setRetweeted(true)
+    }
+
+    const unretweet = () => {
+        unretweetPost(currentUser.id, postInfo.parentPost, postInfo._id)
+        setRetweeted(false)
     }
 
     const favorite = () => {
@@ -80,74 +103,47 @@ const Post = (props) => {
     return(  
         <div>
 
-        {edit && (
-            <EditPost post={postInfo} />
-        )}
+            {edit && (
+                <EditPost post={postInfo} />
+            )}
 
-        {exists && (
-            <div>
-                <Link to={urlId}>{postInfo.creator[0].username}</Link>
-                {/* <div>Username: {postInfo.creator[0].username}</div> */}
-                <div>Body: {postInfo.body}</div>
-                
-                {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
-                    <div>
-                    <Button label="Delete" handleClick={deletePage} />
-                    <Button label="Edit" handleClick={editPost} />
-                    </div>
-                )}
+            {exists && (
                 <div>
-                favorites: {favorites}
-                </div>
-
-                {!userFave && (
-                        <Button label="Favorite" handleClick={favorite}/>
+                    {retweeted && (
+                    <div>Retweeted by: {reposter}</div>
                     )}
 
-                {userFave && (
-                    <Button label="Unfavorite" handleClick={unfavorite}/>
-                )}
-                
-            </div>
-        )}
-        </div> 
-    )
+                    <Link to={urlId}>{postInfo.creator[0].username}</Link>
+                    <div>Body: {postInfo.body}</div>
+                    
+                    {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
+                        <div>
+                        <Button label="Delete" handleClick={deletePage} />
+                        <Button label="Edit" handleClick={editPost} />
+                        </div>
+                    )}
+                    <div>
+                    favorites: {favorites}
+                    </div>
 
+                    {!userFave && (
+                            <Button label="Favorite" handleClick={favorite}/>
+                        )}
 
-    // //helper functions
-    // return (
-    // <div>
-    // {/* determine how to render post based on booleans */}
-    // {post.isRepost && (
-    //     <span>Repost from {post.parentPost.creator}</span>
-    // )}
+                    {userFave && (
+                        <Button label="Unfavorite" handleClick={unfavorite}/>
+                    )}
 
-    // {post.isReply && (
-    //     <span>Replied to {post.parentPost.creator}</span>
-    // )}
+                    {retweeted && (
+                        <Button label="Un-retweet" handleClick={unretweet}/>
+                    )}
 
-    // {/*Link to view author profile */}
-    // {/* <Link to={`/profile/${props.creator.username}`}>{props.creator.username}</Link> */}
-
-    // {/* Post body */}
-    // <p>{props.body}</p>
-
-    // {/* button for favorite */}
-    //     <Button label='Favorite' handleClick={incrementFavorite}/>
-
-    // {/* reply form */}
-    // {/* <form onSubmit={replyToPost}>
-    //     <label>
-    //       Reply
-    //       <input type="text" value={this.state.value} onChange={this.handleReplyChange} />
-    //     </label>
-    //     <input type="submit" value="Reply" />
-    // </form> */}
-
-    // {/* button for repost */}
-    //     <Button label='Repost' handleClick={retweetPost}/>
-
-    // </div>
+                    {!retweeted && (
+                        <Button label="Retweet" handleClick={retweet} />
+                    )}
+                </div>)}
+        </div>
+        )   
 }
 
 export default Post
