@@ -21,6 +21,7 @@ const Post = (props) => {
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
+    let favoritesComponent = props.favoritesComponent
 
     useEffect(() => {
         if (currentUser && postInfo.creator[0].followers.includes(currentUser.id)){
@@ -54,7 +55,9 @@ const Post = (props) => {
         let currentFav = favorites
         setUserFave(true)
         setFavorites(currentFav + 1)
-        setExists(false)
+        if(favoritesComponent){
+            setExists(false)
+        }
     }
 
     const unfavorite = () => {
@@ -62,10 +65,13 @@ const Post = (props) => {
         let currentFav = favorites
         setUserFave(false)
         setFavorites(currentFav - 1)
-        setExists(false)
+        if(favoritesComponent){
+            setExists(false)
+        }
     }
-    
+
     let urlId = '/userProfile/' + postInfo.creator[0]._id
+    
 
 
 

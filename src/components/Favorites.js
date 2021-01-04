@@ -32,7 +32,7 @@ const Favorites = () => {
         })
     }
     const postsFeed = favorites.reverse().map((posts, index) => {
-        return <Post post={posts} />    
+        return <Post post={posts} favoritesComponent={true} />    
     })
 
 
