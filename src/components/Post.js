@@ -21,6 +21,7 @@ const Post = (props) => {
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
+    console.log(postInfo)
     let favoritesComponent = props.favoritesComponent
 
     useEffect(() => {
