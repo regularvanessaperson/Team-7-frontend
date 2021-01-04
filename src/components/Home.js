@@ -9,6 +9,9 @@ import {viewAllPosts} from '../services/post.service.js'
 const Home = (props) => {
     
     const [posts, setPosts] = useState([])
+    const [update, setUpdate] = useState(0)
+
+    console.log("RERENDER HOME")
 
     useEffect(() => {
         viewAllPosts().
@@ -18,10 +21,13 @@ const Home = (props) => {
             console.log(err)
         })
     }, [])
+
+    const rerenderHome = () => {
+        setUpdate(update+1)
+    }
     
     const postsFeed = posts.reverse().map((post, index) => {
-        console.log(post)
-        return <Post post={post} />    
+        return <Post post={post} rerenderHome={rerenderHome} />    
     })
 
     return <div>

@@ -26,7 +26,6 @@ const Searchbar = () => {
     }
 
     useEffect(() => {
-        console.log('posts changed')
     }, [posts])
 
     const handleSearch = (e) => {
