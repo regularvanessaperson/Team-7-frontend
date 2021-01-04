@@ -31,7 +31,7 @@ const Searchbar = () => {
         axios.get('http://localhost:8080/api/user/all').
         then(async (response) => {
             
-             await response.data.forEach(user => {
+             await response.data.map(user => {
                 if ((user.username.toUpperCase() === search.toUpperCase()) && !text){
                     console.log("Result found: ", user.username)
                     setUsers([user, ...users])

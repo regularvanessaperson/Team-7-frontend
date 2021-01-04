@@ -54,6 +54,7 @@ const Post = (props) => {
         let currentFav = favorites
         setUserFave(true)
         setFavorites(currentFav + 1)
+        setExists(false)
     }
 
     const unfavorite = () => {
@@ -61,6 +62,7 @@ const Post = (props) => {
         let currentFav = favorites
         setUserFave(false)
         setFavorites(currentFav - 1)
+        setExists(false)
     }
     
     let urlId = '/userProfile/' + postInfo.creator[0]._id
