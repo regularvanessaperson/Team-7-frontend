@@ -100,10 +100,12 @@ const UserProfile = (props) => {
                     <div>
                         User Posts:
                         {userInfo.posts.map((post, index) => {
+                            {console.log(post.username)}
                             return  <ul>
+                                    {/* <li>Creator: {post.username}</li> */}
                                      <li key={index}>{post.body}</li>
                                 </ul>
-                            // return <Post post={post} />
+                            {/* return <Post post={post} /> */}
                         })}
                     </div>
                     {/* Links to followed, follows, favorites */}
