@@ -47,17 +47,17 @@ export const deletePost = (
 export const retweetPost = (
     creator,
     body,
-    reposter,
     hashtags,
-    parentPost
+    parentPost,
+    originalCreator
 ) => {
     return axios
     .post(API_URL+"retweet", {
         creator,
         body,
-        reposter,
         hashtags,
-        parentPost
+        parentPost,
+        originalCreator
     })
 }
 
