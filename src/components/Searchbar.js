@@ -4,7 +4,7 @@ import Post from './Post'
 import {viewAllPosts} from '../services/post.service.js'
 import {all} from '../services/user.service.js'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 const axios = require('axios')
 
@@ -25,7 +25,12 @@ const Searchbar = () => {
         setText(false)
     }
 
+    useEffect(() => {
+        console.log('posts changed')
+    }, [posts])
+
     const handleSearch = (e) => {
+        setPosts([])
         setText(true)
         e.preventDefault()
         //Need to use the input string to search for tweets and users
@@ -55,11 +60,13 @@ const Searchbar = () => {
                     for (let i = 0; i < postArr.length; i++) {
                     if ((search.toUpperCase() === postArr[i].toUpperCase()) && !text) {
                         //render a Post component if it passes the search
-                        console.log(post)
-                        setPosts([post, ...posts])
+                        let currentPosts = posts
+                        currentPosts.push(post)
+                        setPosts(currentPosts)
                     }
                     }
                 }
+                
                 });
             })
             .catch((err) => {
@@ -82,12 +89,13 @@ const Searchbar = () => {
                 return <Link to={urlId}>{result.username}</Link>
             })}
         </ul>
-        <ul>
-            {posts.map(post => {
-                console.log(posts)
+        {
+            posts.map((post) => {
+                console.log(post)
                 return <Post post={post} />
-            })}
-        </ul>
+            })
+        }
+        {/* <Post post={posts[0]}/> */}
         
         </div>
     )
