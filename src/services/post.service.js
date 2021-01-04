@@ -19,10 +19,12 @@ export const newPost = (
 
 //edit an existing post
 export const editPost = (
+    id,
     body
 ) => {
     return axios
     .put(API_URL+"post", {
+        id,
         body
     })
 }

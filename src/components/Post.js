@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 //Component imports
 import Button from './common/Button'
+import EditPost from './EditPost'
 //import services
 import { deletePost,replyToPost, incrementFavorite, decreaseFavorite, retweetPost } from '../services/post.service.js'
 import { followUser, unfollowUser } from '../services/user.service.js'
@@ -16,10 +17,10 @@ const Post = (props) => {
     const [exists, setExists] = useState(true)
     const [favorites, setFavorites] = useState(0)
     const [userFave, setUserFave] = useState(false)
+    const [edit, setEdit] = useState(false)
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
-    console.log(postInfo)
 
     useEffect(() => {
         if (currentUser && postInfo.creator[0].followers.includes(currentUser.id)){
@@ -37,6 +38,11 @@ const Post = (props) => {
         setFavorites(numFaves)
 
     }, [])
+
+    const editPost = () => {
+        setEdit(true)
+        setExists(false)
+    }
 
     const deletePage = () => {
         deletePost(postInfo._id)
@@ -58,13 +64,17 @@ const Post = (props) => {
     }
     
     let urlId = '/userProfile/' + postInfo.creator[0]._id
-    console.log("UserFave: ", userFave)
 
 
 
 
     return(  
         <div>
+
+        {edit && (
+            <EditPost post={postInfo} />
+        )}
+
         {exists && (
             <div>
                 <Link to={urlId}>{postInfo.creator[0].username}</Link>
@@ -72,7 +82,10 @@ const Post = (props) => {
                 <div>Body: {postInfo.body}</div>
                 
                 {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
+                    <div>
                     <Button label="Delete" handleClick={deletePage} />
+                    <Button label="Edit" handleClick={editPost} />
+                    </div>
                 )}
                 <div>
                 favorites: {favorites}
