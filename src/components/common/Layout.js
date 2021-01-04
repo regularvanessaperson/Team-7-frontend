@@ -35,7 +35,7 @@ const Layout = (props) => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand sticky-top navbar-dark bg-primary">
         <Link to="/" className="navbar-brand">
           Cool Site
         </Link>
