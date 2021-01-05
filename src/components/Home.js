@@ -17,6 +17,7 @@ const Home = (props) => {
         viewAllPosts().
         then((response) => {
             setPosts(response.data)
+            console.log(response)
         }).catch(err => {
             console.log(err)
         })
