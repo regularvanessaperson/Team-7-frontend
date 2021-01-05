@@ -4,7 +4,7 @@ const Button = (props) => {
 
     return (
         <button
-        className="btn btn-default"
+        class = {props.class}
         onClick={props.handleClick}>{props.label}</button>
     )
 }
