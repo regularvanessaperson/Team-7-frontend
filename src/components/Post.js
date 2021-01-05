@@ -140,33 +140,41 @@ const Post = (props) => {
                             )}
                         </div>
                     )}
+                    {(currentUser) &&
+                        <div>
+                            {!userFave && (
+                                <Button label="Favorite" handleClick={favorite} />
+                            )}
+
+                            {userFave && (
+                                <Button label="Unfavorite" handleClick={unfavorite} />
+                            )}
+
+                            {retweeted && (
+                                <Button label="Un-retweet" handleClick={unretweet} />
+                            )}
+
+                            {!retweeted && (
+                                <Button label="Retweet" handleClick={retweet} />
+                            )}
+                        </div>
+                    }
+                   
                     <div>
                         favorites: {favorites}
-                    </div>
-                    {retweeted && (
+                       {retweeted && (
                         <div>Retweets: {numretweet}</div>
                     )}
-
-                    {!userFave && (
-                        <Button label="Favorite" handleClick={favorite} />
-                    )}
-
-                    {userFave && (
-                        <Button label="Unfavorite" handleClick={unfavorite} />
-                    )}
-
-                    {retweeted && (
-                        <Button label="Un-retweet" handleClick={unretweet} />
-                    )}
-
-                    {!retweeted && (
-                        <Button label="Retweet" handleClick={retweet} />
-                    )}
-                    <Link to={{
+                    </div>
+                    
+                    
+                </div>)}
+                
+                <Link to={{
                         pathname: `/reply/${postInfo._id}`,
                         state: postInfo._id
-                    }} className="nav-link">Replies</Link>
-                </div>)}
+                    }} className="nav-link">{postInfo.replies.length} Replies</Link>
+                    
 
         </div>
     )

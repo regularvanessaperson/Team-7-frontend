@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { getCurrentUser } from '../services/auth.service.js'
 import {newPost} from '../services/post.service.js'
+import { replyToPost } from '../services/post.service'
 
-const PostForm = () => {
+const PostForm = (props) => {
 
     const currentUser = getCurrentUser()
+    const creator = currentUser.id
     const [post, setPost] = useState("")
+    let parentPost = props.parentPost
 
     const onChangePost = (e) => {
         const postText = e.target.value
@@ -13,7 +16,6 @@ const PostForm = () => {
     }
 
     const handlePost = (e) => {
-
         const hashtags = []
         // splits a post by space
         let postArr = post.split(" ")
@@ -23,8 +25,11 @@ const PostForm = () => {
                 hashtags.push(word)
             }
         })
-
-        newPost(currentUser.id, post, hashtags)
+        if(parentPost) {
+            replyToPost(creator, post, hashtags, parentPost)
+        }else {
+            newPost(creator, post, hashtags)
+        }
     }
 
     return (
