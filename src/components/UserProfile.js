@@ -51,30 +51,55 @@ const UserProfile = (props) => {
             const userInfo = user.data
             console.log(userInfo)
             return (
-                <div>
-                    <div>
-                        {userInfo.username}
-                      <div><Link to={"/favorites"} className="nav-link">Favorites</Link></div>  
-                      <div><Link to={"/following"} className="nav-link">Following</Link></div>
+                <div class = "container">
+                    
+                    <div class = "card">
+                        <h2 class = "nav-link">
+                            <strong>User Information</strong>
+                        </h2>
+
+                        <div>
+                            <img
+                            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                            alt="profile-img"
+                            className="nav-link"
+                            />
+                            <h3>
+                            <strong class = "nav-link">{userInfo.username}</strong>
+                            </h3>
+                        </div>
+                        
+                        <div>
+                            <Link to={"/favorites"} class = "nav-link">Favorite Posts</Link>
+                        </div>
+
+                        <div>
+                          <Link to={"/following"} class = "nav-link">Following Feed</Link>
+                        </div>
+                    
+                        <div class = "nav-link">
+                            {!follows && (
+                                <Button label="Follow" handleClick={follow} class="btn btn-primary mt-4"/>
+                            )}
+
+                            {follows && (
+                                <Button label="Unfollow" handleClick={unfollow} class="btn btn-danger mt-4"/>
+                            )}
+                        </div>
                     </div>
 
-                    {!follows && (
-                        <Button label="Follow" handleClick={follow}/>
-                    )}
-
-                    {follows && (
-                        <Button label="Unfollow" handleClick={unfollow}/>
-                    )}
-
-                    <div>
-                    This user follows:
+                    <div class = "card">
+                        <h4 class="nav-link">
+                            <strong>Currently Following</strong>
+                        </h4>
+                    
                     {userInfo.followed.map((followed, index) => {
                         if (followed === null){
-                            return <div>You are not following anyone yet.</div>
+                            return <div class="nav-link">You are not following anyone yet.</div>
                    
                         }else {
-                            return  <ul>
-                            <li key={index}>{followed.username}</li>
+                            return  <ul class="list-unstyled">
+                            <li class="nav-link" key={index}>{followed.username}</li>
                             {/* return <Post post={post} /> */}
                        </ul>
                             
@@ -82,30 +107,38 @@ const UserProfile = (props) => {
                             
                         })}
                     </div>
-                    <div>
-                    This user is being followed by:
+                    <div class = "card">
+                        <h4 class="nav-link">
+                            <strong>Current Followers</strong>
+                        </h4>
                     {userInfo.followers.map((followers, index) => {
+                        {console.log(followers)}
                         if (followers.length === 0){
-                            return <div>You have no followers yet.</div>
+                            return <div class="nav-link">You have no followers yet.</div>
                         }else {
                             return  <div>
-                            <ul>
-                            <li key={index}>{followers.username}</li>
+                            <ul class="list-unstyled">
+                            <li class="nav-link" key={index}>{followers.username}</li>
                             {/* // return <Post post={post} /> */}
                        </ul>
                             </div>
                         }
                         })}
                     </div>
-                    <div>
-                        User Posts:
+                    <div class = "card">
+                        <h4 class="nav-link">
+                            <strong>Posts</strong>
+                        </h4>
+                        
                         {userInfo.posts.map((post, index) => {
-                            {console.log(post.username)}
-                            return  <ul>
+                            {console.log(post)}
+                            return  <ul class="list-group">
                                     {/* <li>Creator: {post.username}</li> */}
-                                     <li key={index}>{post.body}</li>
+                                     <li class="list-group-item mb-2" key={post._id}>{post.body}</li>
                                 </ul>
                             {/* return <Post post={post} /> */}
+                            
+                            
                         })}
                     </div>
                     {/* Links to followed, follows, favorites */}
