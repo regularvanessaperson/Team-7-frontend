@@ -119,16 +119,18 @@ const UserProfile = (props) => {
                     </div>
                     <div class = "card">
                         <h4>
-                            <strong>Current Followers</strong>
+                            <strong>Posts</strong>
                         </h4>
                         
                         {userInfo.posts.map((post, index) => {
-                            {console.log(post.username)}
-                            return  <ul>
+                            {console.log(post)}
+                            return  <ul class="list-group">
                                     {/* <li>Creator: {post.username}</li> */}
-                                     <li key={index}>{post.body}</li>
+                                     <li class="list-group-item mb-2" key={post._id}>{post.body}</li>
                                 </ul>
                             {/* return <Post post={post} /> */}
+                            
+                            
                         })}
                     </div>
                     {/* Links to followed, follows, favorites */}
