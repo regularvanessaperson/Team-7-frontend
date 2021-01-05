@@ -37,18 +37,18 @@ const Post = (props) => {
         } else {
             setFollows(false)
         }
-        if (postInfo.favoritedBy.includes(currentUser.id)) {
+        if (currentUser && postInfo.favoritedBy.includes(currentUser.id)) {
             setUserFave(true)
         } else {
             setUserFave(false)
         }
-        if (postInfo.repostedBy.includes(currentUser.id)) {
+        if (currentUser && postInfo.repostedBy.includes(currentUser.id)) {
             setRetweeted(true)
         }
         else {
             setRetweeted(false)
         }
-        if (postInfo.isRepost) {
+        if (currentUser && postInfo.isRepost) {
             setOriginal(postInfo.originalCreator)
             setRepost(true)
         }
@@ -124,10 +124,6 @@ const Post = (props) => {
                         <div>Original by: {original}</div>
                     )}
 
-                    {retweeted && (
-                        <div>Retweets: {numretweet}</div>
-                    )}
-
                     <Link to={urlId}>{postInfo.creator[0].username}</Link>
                     <div>Body: {postInfo.body}</div>
 
@@ -147,6 +143,9 @@ const Post = (props) => {
                     <div>
                         favorites: {favorites}
                     </div>
+                    {retweeted && (
+                        <div>Retweets: {numretweet}</div>
+                    )}
 
                     {!userFave && (
                         <Button label="Favorite" handleClick={favorite} />
@@ -159,7 +158,6 @@ const Post = (props) => {
                     {retweeted && (
                         <Button label="Un-retweet" handleClick={unretweet} />
                     )}
-
 
                     {!retweeted && (
                         <Button label="Retweet" handleClick={retweet} />

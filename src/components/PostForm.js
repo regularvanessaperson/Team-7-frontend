@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { getCurrentUser } from '../services/auth.service.js'
 import {newPost} from '../services/post.service.js'
-import { replyToPost } from '../services/post.service'
 
-const PostForm = (props) => {
+const PostForm = () => {
 
     const currentUser = getCurrentUser()
-    const creator = currentUser.id
     const [post, setPost] = useState("")
-    let parentPost = props.parentPost
+
     const onChangePost = (e) => {
         const postText = e.target.value
         setPost(postText)
@@ -26,13 +24,7 @@ const PostForm = (props) => {
             }
         })
 
-        if(parentPost) {
-            replyToPost(creator, post, hashtags, parentPost)
-        }else {
-            newPost(creator, post, hashtags)
-        }
-        
-        
+        newPost(currentUser.id, post, hashtags)
     }
 
     return (
