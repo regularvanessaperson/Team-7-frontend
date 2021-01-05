@@ -32,7 +32,7 @@ const Post = (props) => {
     let favoritesComponent = props.favoritesComponent
 
     useEffect(() => {
-        if (currentUser && postInfo.creator[0].followers.includes(currentUser.id)) {
+        if (currentUser && postInfo.creator[0].followers && postInfo.creator[0].followers.includes(currentUser.id)) {
             setFollows(true)
         } else {
             setFollows(false)
@@ -44,7 +44,7 @@ const Post = (props) => {
         }
         if (postInfo.repostedBy.includes(currentUser.id)) {
             setRetweeted(true)
-            }
+        }
         else {
             setRetweeted(false)
         }
@@ -105,7 +105,7 @@ const Post = (props) => {
     }
 
     let urlId = '/userProfile/' + postInfo.creator[0]._id
-    
+
 
 
 
@@ -121,7 +121,7 @@ const Post = (props) => {
             {exists && (
                 <div>
                     {original && (
-                    <div>Original by: {original}</div>
+                        <div>Original by: {original}</div>
                     )}
 
                     {retweeted && (
@@ -133,15 +133,15 @@ const Post = (props) => {
 
                     {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
                         <div>
-                        {original && (
-                            <Button label="Un-retweet" handleClick={unretweet} />
-                        )}
-                        {!original && (
-                            <div>
-                            <Button label="Delete" handleClick={deletePage} />
-                            <Button label="Edit" handleClick={editPost} />
-                            </div>
-                        )}
+                            {original && (
+                                <Button label="Un-retweet" handleClick={unretweet} />
+                            )}
+                            {!original && (
+                                <div>
+                                    <Button label="Delete" handleClick={deletePage} />
+                                    <Button label="Edit" handleClick={editPost} />
+                                </div>
+                            )}
                         </div>
                     )}
                     <div>
@@ -164,13 +164,14 @@ const Post = (props) => {
                     {!retweeted && (
                         <Button label="Retweet" handleClick={retweet} />
                     )}
+                    <Link to={{
+                        pathname: `/reply/${postInfo._id}`,
+                        state: postInfo._id
+                    }} className="nav-link">Replies</Link>
                 </div>)}
-            <Link to={{
-                pathname: "/Reply",
-                state: postInfo._id
-                }} className="nav-link">Replies</Link>
+
         </div>
-        )   
+    )
 }
 
 export default Post

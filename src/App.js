@@ -26,7 +26,7 @@ const App = ()=> {
         <Route exact path ="/userProfile/:id" component={UserProfile}/>
         <Route exact path ="/favorites" component={Favorites}/>
         <Route exact path ="/following" component={Following} />
-        <Route exact path ="/reply" component={Reply} />
+        <Route exact path ="/reply/:idx" component={Reply} />
       </Switch>
       </Layout>
     );

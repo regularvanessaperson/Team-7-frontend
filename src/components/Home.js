@@ -11,7 +11,7 @@ const Home = (props) => {
     const [posts, setPosts] = useState([])
     const [update, setUpdate] = useState(0)
 
-    console.log("RERENDER HOME")
+    
 
     useEffect(() => {
         viewAllPosts().
@@ -26,9 +26,10 @@ const Home = (props) => {
     const rerenderHome = () => {
         setUpdate(update+1)
     }
+    console.log("RERENDER HOME", posts)
     
     const postsFeed = posts.reverse().map((post, index) => {
-        return <Post post={post} rerenderHome={rerenderHome} />    
+        return <Post key={post.id} post={post} rerenderHome={rerenderHome} />    
     })
 
     return <div>
