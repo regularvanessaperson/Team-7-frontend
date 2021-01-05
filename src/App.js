@@ -11,7 +11,7 @@ import Profile from './components/Profile'
 import UserProfile from './components/UserProfile'
 import Favorites from './components/Favorites'
 import Following from './components/Following'
-
+import Reply from './components/Reply'
 //CSS imports
 import "./css/App.css";
 
@@ -26,6 +26,7 @@ const App = ()=> {
         <Route exact path ="/userProfile/:id" component={UserProfile}/>
         <Route exact path ="/favorites" component={Favorites}/>
         <Route exact path ="/following" component={Following} />
+        <Route exact path ="/reply" component={Reply} />
       </Switch>
       </Layout>
     );

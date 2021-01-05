@@ -34,8 +34,8 @@ const Searchbar = () => {
         e.preventDefault()
         //Need to use the input string to search for tweets and users
         //Search for users first:
-        all().
-        then(async (response) => {
+        all()
+        .then(async (response) => {
             const userResults = response.data
             userResults.forEach((user) => {
                 if ((user.username.toUpperCase() === search.toUpperCase()) && !text){

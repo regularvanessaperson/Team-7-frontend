@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import Button from './common/Button'
 import EditPost from './EditPost'
 //import services
-import { deletePost,replyToPost, incrementFavorite, decreaseFavorite, retweetPost, unretweetPost } from '../services/post.service.js'
+import { deletePost, replyToPost, incrementFavorite, decreaseFavorite, retweetPost, unretweetPost } from '../services/post.service.js'
 import { getUserProfile } from '../services/user.service.js'
 
 
@@ -32,17 +32,17 @@ const Post = (props) => {
     let favoritesComponent = props.favoritesComponent
 
     useEffect(() => {
-        if (currentUser && postInfo.creator[0].followers.includes(currentUser.id)){
+        if (currentUser && postInfo.creator[0].followers.includes(currentUser.id)) {
             setFollows(true)
         } else {
             setFollows(false)
         }
-        if (postInfo.favoritedBy.includes(currentUser.id)){
+        if (postInfo.favoritedBy.includes(currentUser.id)) {
             setUserFave(true)
         } else {
             setUserFave(false)
         }
-        if (postInfo.repostedBy.includes(currentUser.id)){
+        if (postInfo.repostedBy.includes(currentUser.id)) {
             setRetweeted(true)
             }
         else {
@@ -89,7 +89,7 @@ const Post = (props) => {
         let currentFav = favorites
         setUserFave(true)
         setFavorites(currentFav + 1)
-        if(favoritesComponent){
+        if (favoritesComponent) {
             setExists(false)
         }
     }
@@ -99,7 +99,7 @@ const Post = (props) => {
         let currentFav = favorites
         setUserFave(false)
         setFavorites(currentFav - 1)
-        if(favoritesComponent){
+        if (favoritesComponent) {
             setExists(false)
         }
     }
@@ -110,7 +110,8 @@ const Post = (props) => {
 
 
 
-    return(  
+
+    return (
         <div>
 
             {edit && (
@@ -129,7 +130,7 @@ const Post = (props) => {
 
                     <Link to={urlId}>{postInfo.creator[0].username}</Link>
                     <div>Body: {postInfo.body}</div>
-                    
+
                     {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
                         <div>
                         {original && (
@@ -144,21 +145,30 @@ const Post = (props) => {
                         </div>
                     )}
                     <div>
-                    favorites: {favorites}
+                        favorites: {favorites}
                     </div>
 
                     {!userFave && (
-                            <Button label="Favorite" handleClick={favorite}/>
-                        )}
-
-                    {userFave && (
-                        <Button label="Unfavorite" handleClick={unfavorite}/>
+                        <Button label="Favorite" handleClick={favorite} />
                     )}
 
-                    {(!retweeted && !original && !repost) && (
+                    {userFave && (
+                        <Button label="Unfavorite" handleClick={unfavorite} />
+                    )}
+
+                    {retweeted && (
+                        <Button label="Un-retweet" handleClick={unretweet} />
+                    )}
+
+
+                    {!retweeted && (
                         <Button label="Retweet" handleClick={retweet} />
                     )}
                 </div>)}
+            <Link to={{
+                pathname: "/Reply",
+                state: postInfo._id
+                }} className="nav-link">Replies</Link>
         </div>
         )   
 }
