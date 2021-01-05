@@ -51,11 +51,26 @@ const UserProfile = (props) => {
             const userInfo = user.data
             console.log(userInfo)
             return (
-                <div>
-                    <div>
-                        {userInfo.username}
-                      <div><Link to={"/favorites"} className="nav-link">Favorites</Link></div>  
-                      <div><Link to={"/following"} className="nav-link">Following</Link></div>
+                <div class = "container">
+                    
+                    <div class = "card">
+                        <h2 class = "nav-link">
+                            <strong>User Information</strong>
+                        </h2>
+
+                        <div>
+                            <h3>
+                            <strong class = "nav-link">{userInfo.username}</strong>
+                            </h3>
+                        </div>
+                        
+                        <div>
+                            <Link to={"/favorites"} class = "nav-link">Favorite Posts</Link>
+                        </div>
+
+                        <div>
+                          <Link to={"/following"}  class = "nav-link">Following Feed</Link>
+                        </div>
                     </div>
 
                     {!follows && (
@@ -66,8 +81,11 @@ const UserProfile = (props) => {
                         <Button label="Unfollow" handleClick={unfollow}/>
                     )}
 
-                    <div>
-                    This user follows:
+                    <div class = "card">
+                        <h4>
+                            <strong>Currently Following</strong>
+                        </h4>
+                    
                     {userInfo.followed.map((followed, index) => {
                         if (followed === null){
                             return <div>You are not following anyone yet.</div>
@@ -82,8 +100,10 @@ const UserProfile = (props) => {
                             
                         })}
                     </div>
-                    <div>
-                    This user is being followed by:
+                    <div class = "card">
+                        <h4>
+                            <strong>Current Followers</strong>
+                        </h4>
                     {userInfo.followers.map((followers, index) => {
                         if (followers.length === 0){
                             return <div>You have no followers yet.</div>
@@ -97,8 +117,11 @@ const UserProfile = (props) => {
                         }
                         })}
                     </div>
-                    <div>
-                        User Posts:
+                    <div class = "card">
+                        <h4>
+                            <strong>Current Followers</strong>
+                        </h4>
+                        
                         {userInfo.posts.map((post, index) => {
                             {console.log(post.username)}
                             return  <ul>
