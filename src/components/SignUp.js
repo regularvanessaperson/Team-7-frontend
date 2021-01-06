@@ -14,7 +14,7 @@ import {resMessage} from '../utilities/functions.utilities'
 
 import {login} from '../services/auth.service'
 
-const axios = require('axios')
+
 
 //Function given to react-validator
 const required = (value) => {
@@ -164,16 +164,7 @@ const SignUp = (props) => {
                         />
                     </FormGroup>
                     <ButtonSpinner text="Sign Up" />
-                    {/* set up loader if you want later */}
-                    {/* <ButtonSpinner text="Sign Up" loading={successful} /> */}
-                    {/* <div className="form-group">
-                        <button className="btn btn-primary btn-block" disabled={loading}>
-                            {loading && (
-                                <span className="spinner-border spinner-border-sm"></span>
-                            )}
-                            <span>Signup</span>
-                        </button> 
-                    </div> */}
+
                     {message && (
                         <div className="form-group">
                             <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
@@ -181,6 +172,7 @@ const SignUp = (props) => {
                             </div>
                         </div>
                     )}
+
                     {/*needs to be used for react validation to submit the form */}
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
