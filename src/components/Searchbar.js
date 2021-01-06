@@ -79,7 +79,7 @@ const Searchbar = () => {
                     <form class="d-inline" onSubmit={handleSearch}>
                         <div class="d-flex w-50">
                             <input type="text" class="form-control" value={search} onChange={onChangeSearch} placeholder="search..."/>
-                            <button class="btn btn-primary" type="submit">Search</button>
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                         </div>
                         {/* <input type="submit" value="Submit" /> */}
                     </form>    
