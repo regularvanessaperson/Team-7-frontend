@@ -75,14 +75,14 @@ const Searchbar = () => {
 
     return (
         <>
-        <div class="d-inline-flex p-2">
             
-                    <form onSubmit={handleSearch}>
-                        <input type="text" class="form-control" value={search} onChange={onChangeSearch} placeholder="search..."/>
-                        <button class="btn btn-primary" type="submit">Search</button>
+                    <form class="d-inline" onSubmit={handleSearch}>
+                        <div class="d-flex w-50">
+                            <input type="text" class="form-control" value={search} onChange={onChangeSearch} placeholder="search..."/>
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
                         {/* <input type="submit" value="Submit" /> */}
                     </form>    
-        </div>
         
         <ul>
             {users.map(result => {
