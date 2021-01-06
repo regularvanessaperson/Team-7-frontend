@@ -3,14 +3,17 @@ import React, {useState, useEffect} from 'react'
 
 import Post from "./Post"
 import PostForm from "./PostForm"
+import { getCurrentUser } from '../services/auth.service'
 import { viewOnePost } from '../services/post.service'
 import { useParams } from "react-router";
 
 
 const Reply = () => {
     const {idx}= useParams()
+    const [mainPostUser, setMainPostUser] = useState("")
     const [mainPost, setMainPost] = useState([])
     const [repliesArray, setRepliesArray] = useState([])
+    const currentUser = getCurrentUser("")
 
    console.log("idx", idx)
    
@@ -19,12 +22,14 @@ const Reply = () => {
      viewOnePost(idx)
     .then((response) => {
         const parentPost = response.data.map(post =>{
-            console.log("parent response", post)
+            const parentUser = getCurrentUser(post.creator)
+            setMainPostUser(parentUser)
+            console.log("parent response", mainPostUser)
             return <Post key={post._id} post={post}  />
         })
         
         setMainPost(parentPost)
-        console.log ("main post creator", mainPost.creator) 
+        console.log ("main post creator", mainPost) 
     })
    
 }  

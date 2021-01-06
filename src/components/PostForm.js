@@ -6,7 +6,6 @@ import { replyToPost } from '../services/post.service'
 const PostForm = (props) => {
 
     const currentUser = getCurrentUser()
-    const creator = currentUser.id
     const [post, setPost] = useState("")
     let parentPost = props.parentPost
 
@@ -26,15 +25,15 @@ const PostForm = (props) => {
             }
         })
         if(parentPost) {
-            replyToPost(creator, post, hashtags, parentPost)
+            replyToPost(currentUser.id, post, hashtags, parentPost)
         }else {
-            newPost(creator, post, hashtags)
+            newPost(currentUser.id, post, hashtags)
         }
     }
 
     return (
         <div>
-        {(currentUser) && (
+        {currentUser && (
             <form onSubmit={handlePost}>
             <label>
             Write a post:
