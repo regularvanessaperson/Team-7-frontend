@@ -9,12 +9,16 @@ import { getCurrentUser } from '../services/auth.service'
 import Post from './Post'
 import { useParams } from "react-router";
 import { followUser, unfollowUser } from '../services/user.service.js'
+const axios = require('axios')
+
+
 
 
 const UserProfile = (props) => {
     const currentUser = getCurrentUser("")
     const [profile, setProfile] = useState([])
     const [follows, setFollows] = useState(false)
+    const [current, setCurrent] = useState(false)
 
     const {id} = useParams()
     
@@ -35,21 +39,39 @@ const UserProfile = (props) => {
 
     const checkFollow = async () => {
         let curr = await (await getUserProfile(id)).data.followers
-        console.log(currentUser.id)
+        // console.log(currentUser.id)
         for (let i = 0; i < curr.length; i++){
-            console.log(curr[i].followers)
+            // console.log(curr[i].followers)
             if (curr[i].followers.includes(currentUser.id)){
                 setFollows(true)
-                console.log("Follows: ", follows)
+                // console.log("Follows: ", follows)
             }
         }
+    }
+
+    const handleImageUpload = (e) => {
+        const [file] = e.target.files
+        
+        let formData = new FormData()
+        
+        formData.append("userPhoto", file)
+        console.log(formData.userPhoto)
+        // axios.post('http://localhost:8080/api/photo', formData, {
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data'
+        //     }
+        // })
+        
     }
     
 
     async function userProfile() {
         return await getUserProfile(id).then(user => {
             const userInfo = user.data
-            console.log(userInfo)
+            console.log("Ids: ", userInfo._id, currentUser.id)
+            if (userInfo._id === currentUser.id){
+                setCurrent(true)
+            }
             return (
                 <div class = "container">
                     
@@ -68,6 +90,10 @@ const UserProfile = (props) => {
                             <strong class = "nav-link">{userInfo.username}</strong>
                             </h3>
                         </div>
+
+                        {current && (
+                            <input type="file" accept="image/*" onChange={handleImageUpload} multiple={false}/>
+                        )}
                         
                         <div>
                             <Link to={"/favorites"} class = "nav-link">Favorite Posts</Link>
@@ -112,7 +138,7 @@ const UserProfile = (props) => {
                             <strong>Current Followers</strong>
                         </h4>
                     {userInfo.followers.map((followers, index) => {
-                        {console.log(followers)}
+                        {/* {console.log(followers)} */}
                         if (followers.length === 0){
                             return <div class="nav-link">You have no followers yet.</div>
                         }else {
@@ -131,7 +157,7 @@ const UserProfile = (props) => {
                         </h4>
                         
                         {userInfo.posts.map((post, index) => {
-                            {console.log(post)}
+                            {/* {console.log(post)} */}
                             return <Post post={post} />
                             
                             
