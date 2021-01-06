@@ -12,7 +12,7 @@ import { getUserProfile } from '../services/user.service.js'
 
 
 const Post = (props) => {
- console.log("prop prop", props)
+    console.log("prop prop", props)
     const [follows, setFollows] = useState(null)
     const [exists, setExists] = useState(true)
     const [favorites, setFavorites] = useState(0)
@@ -115,87 +115,95 @@ const Post = (props) => {
 
 
     return (
-        <div class = "card w-100">
-
-            {edit && (
-                <EditPost post={postInfo} />
-            )}
-
-            {exists && (
-                <div>
-                    {original && (
-                        <div>
-                            <strong class="text-muted">Re-posted from: {original}</strong>
-                        </div>
-                    )}
-
-                    <Link to={urlId}>
-                        <strong>{postInfo.creator[0].username}</strong>
-                    </Link>
-
-                    <div class="mt-2">{postInfo.body}</div>
-
-                    {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
-                        <div class="row">
-                            {original && (
-                                <div class="col-sm mt-3">
-                                <Button label="Un-retweet" handleClick={unretweet} />
-                                </div>
-                            )}
-                            {!original && (
-                                <div class="row mt-3">
-                                    <div class ="col-sm me-3">
-                                        <Button label="Delete" handleClick={deletePage}  />
-                                    </div>
-                                    <div class ="col-sm me-3">
-                                        <Button label="Edit" handleClick={editPost} />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                    {(currentUser) &&
-                        <div class="row">
-                            {!userFave && (
-                                <Button label="Favorite" handleClick={favorite} class="col-sm mt-3"/>
-                            )}
-
-                            {userFave && (
-                                <Button label="Unfavorite" handleClick={unfavorite} class="col-sm mt-3"/>
-                            )}
-
-                            {retweeted && (
-                                <Button label="Un-retweet" handleClick={unretweet} class="col-sm mt-3"/>
-                            )}
-
-                            {!retweeted && (
-                                <Button label="Retweet" handleClick={retweet} class="col-sm mt-3"/>
-                            )}
-                        </div>
-                    }
-                   
-                    <div class="mt-3">
-                        <div>Favorites: {favorites}</div>
-                       {retweeted && (
-                        <div>Retweets: {numretweet}</div>
-                        )}
-                    </div>
-                    
-                    
-                </div>)}
+        
+            <div className="card w-100">
+                {/* <div className="card-header"> */}
+                {edit && (
+                    <EditPost post={postInfo} />
+                )}
                 
-                <Link 
-                    to={{
-                        pathname: `/reply/${postInfo._id}`,
-                        state: postInfo._id
-                    }} 
-                    onClick={reply}
-                >
-                        {postInfo.replies.length} Replies
-                </Link>
-                    
+                {exists && (
+                    <div>
+                        {original && (
+                            <div className="card-header">
+                                <strong>Re-posted from: {original}</strong>
+                            </div>
+                        )}
+                        <div className="card-body">
+                            <div className="card-title">
+                                <Link to={urlId}>
+                                    <div>{postInfo.creator[0].username}</div>
+                                </Link>
+                            </div>
+                            <p className="card-text">{postInfo.body}</p>
 
-        </div>
+                            <div className="row">
+                                {(currentUser) &&
+                                    <div >
+                                        {!userFave && (
+                                            <Button label="Favorite" handleClick={favorite} />
+                                        )}
+
+                                        {userFave && (
+                                            <Button label="Unfavorite" handleClick={unfavorite} />
+                                        )}
+
+                                        {retweeted && (
+                                            <Button label="Un-retweet" handleClick={unretweet} />
+                                        )}
+
+                                        {!retweeted && (
+                                            <Button label="Retweet" handleClick={retweet} />
+                                        )}
+                                    </div>
+                                }
+                                {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
+                                    <div>
+                                        {/* {original && (
+                                            <div class="col-sm mt-3">
+                                                <Button label="Un-retweet" handleClick={unretweet} />
+                                            </div>
+                                        )} */}
+                                        {!original && (
+                                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <Button className="btn btn-primary" type="button" label="Delete" handleClick={deletePage} />
+                                                <Button className="btn btn-primary" type="button" label="Edit" handleClick={editPost}/> 
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+
+                            </div>
+                        </div>
+
+                    </div>)}
+                <div >
+                <div class="container">
+                    <div className="card-body row">
+                        <div className="col-sm">Favorites: {favorites}</div>
+                        {retweeted && (
+                            <div className="col-sm">Retweets: {numretweet}</div>
+                        )}
+                        <div className="col-sm">
+                        <Link
+                            to={{
+                                pathname: `/reply/${postInfo._id}`,
+                                state: postInfo._id
+                            }}
+                            onClick={reply}
+                        >
+                            {postInfo.replies.length} Replies
+                        </Link>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+             
+
+            </div>
+        
     )
 }
 
