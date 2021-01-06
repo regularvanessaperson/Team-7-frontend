@@ -116,7 +116,7 @@ const Post = (props) => {
 
     return (
         
-            <div className="card w-100">
+            <div className="card w-100 p-0">
                 {/* <div className="card-header"> */}
                 {edit && (
                     <EditPost post={postInfo} />
@@ -141,19 +141,19 @@ const Post = (props) => {
                                 {(currentUser) &&
                                     <div >
                                         {!userFave && (
-                                            <Button label="Favorite" handleClick={favorite} />
+                                            <Button label="Favorite" className="btn btn-primary" handleClick={favorite} />
                                         )}
 
                                         {userFave && (
-                                            <Button label="Unfavorite" handleClick={unfavorite} />
+                                            <Button label="Unfavorite" className="btn btn-primary " handleClick={unfavorite} />
                                         )}
 
                                         {retweeted && (
-                                            <Button label="Un-retweet" handleClick={unretweet} />
+                                            <Button label="Un-retweet" className="btn btn-primary" handleClick={unretweet} />
                                         )}
 
                                         {!retweeted && (
-                                            <Button label="Retweet" handleClick={retweet} />
+                                            <Button label="Retweet" className="btn btn-primary" handleClick={retweet} />
                                         )}
                                     </div>
                                 }
@@ -179,13 +179,13 @@ const Post = (props) => {
 
                     </div>)}
                 <div >
-                <div class="container">
-                    <div className="card-body row">
-                        <div className="col-sm">Favorites: {favorites}</div>
+                <div class="container .ps-2">
+                    <div className="card-body row  p-0">
+                        <div className="col-sm p-2">Favorites: {favorites}</div>
                         {retweeted && (
-                            <div className="col-sm">Retweets: {numretweet}</div>
+                            <div className="col-sm p-2">Retweets: {numretweet}</div>
                         )}
-                        <div className="col-sm">
+                        <div className="col-sm p-2">
                         <Link
                             to={{
                                 pathname: `/reply/${postInfo._id}`,

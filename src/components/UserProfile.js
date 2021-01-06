@@ -73,10 +73,10 @@ const UserProfile = (props) => {
                 setCurrent(true)
             }
             return (
-                <div class = "container">
+                <div className = "container">
                     
-                    <div class = "card">
-                        <h2 class = "nav-link">
+                    <div className = "card">
+                        <h2 className = "nav-link">
                             <strong>User Information</strong>
                         </h2>
 
@@ -87,7 +87,7 @@ const UserProfile = (props) => {
                             className="nav-link"
                             />
                             <h3>
-                            <strong class = "nav-link">{userInfo.username}</strong>
+                            <strong className = "nav-link">{userInfo.username}</strong>
                             </h3>
                         </div>
 
@@ -96,36 +96,36 @@ const UserProfile = (props) => {
                         )}
                         
                         <div>
-                            <Link to={"/favorites"} class = "nav-link">Favorite Posts</Link>
+                            <Link to={"/favorites"} className = "nav-link">Favorite Posts</Link>
                         </div>
 
                         <div>
-                          <Link to={"/following"} class = "nav-link">Following Feed</Link>
+                          <Link to={"/following"} className = "nav-link">Following Feed</Link>
                         </div>
                     
-                        <div class = "nav-link">
+                        <div className = "nav-link">
                             {!follows && (
-                                <Button label="Follow" handleClick={follow} class="btn btn-primary mt-4"/>
+                                <Button label="Follow" handleClick={follow} className="btn btn-primary mt-4"/>
                             )}
 
                             {follows && (
-                                <Button label="Unfollow" handleClick={unfollow} class="btn btn-danger mt-4"/>
+                                <Button label="Unfollow" handleClick={unfollow} className="btn btn-danger mt-4"/>
                             )}
                         </div>
                     </div>
 
-                    <div class = "card">
-                        <h4 class="nav-link">
+                    <div className = "card">
+                        <h4 className="nav-link">
                             <strong>Currently Following</strong>
                         </h4>
                     
                     {userInfo.followed.map((followed, index) => {
                         if (followed === null){
-                            return <div class="nav-link">You are not following anyone yet.</div>
+                            return <div className="nav-link">You are not following anyone yet.</div>
                    
                         }else {
-                            return  <ul class="list-unstyled">
-                            <li class="nav-link" key={index}>{followed.username}</li>
+                            return  <ul className="list-unstyled">
+                            <li className="nav-link" key={index}>{followed.username}</li>
                             {/* return <Post post={post} /> */}
                        </ul>
                             
@@ -133,26 +133,26 @@ const UserProfile = (props) => {
                             
                         })}
                     </div>
-                    <div class = "card">
-                        <h4 class="nav-link">
+                    <div className = "card">
+                        <h4 className="nav-link">
                             <strong>Current Followers</strong>
                         </h4>
                     {userInfo.followers.map((followers, index) => {
                         {/* {console.log(followers)} */}
                         if (followers.length === 0){
-                            return <div class="nav-link">You have no followers yet.</div>
+                            return <div className="nav-link">You have no followers yet.</div>
                         }else {
                             return  <div>
-                            <ul class="list-unstyled">
-                            <li class="nav-link" key={index}>{followers.username}</li>
+                            <ul className="list-unstyled">
+                            <li className="nav-link" key={index}>{followers.username}</li>
                             {/* // return <Post post={post} /> */}
                        </ul>
                             </div>
                         }
                         })}
                     </div>
-                    <div class = "card">
-                        <h4 class="nav-link">
+                    <div className = "card">
+                        <h4 className="nav-link">
                             <strong>Posts</strong>
                         </h4>
                         
