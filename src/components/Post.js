@@ -115,7 +115,7 @@ const Post = (props) => {
 
 
     return (
-        <div>
+        <div class = "card w-100">
 
             {edit && (
                 <EditPost post={postInfo} />
@@ -124,62 +124,75 @@ const Post = (props) => {
             {exists && (
                 <div>
                     {original && (
-                        <div>Original by: {original}</div>
+                        <div>
+                            <strong class="text-muted">Re-posted from: {original}</strong>
+                        </div>
                     )}
 
-                    <Link to={urlId}>{postInfo.creator[0].username}</Link>
-                    <div>Body: {postInfo.body}</div>
+                    <Link to={urlId}>
+                        <strong>{postInfo.creator[0].username}</strong>
+                    </Link>
+
+                    <div class="mt-2">{postInfo.body}</div>
 
                     {(currentUser && postInfo.creator[0]._id === currentUser.id) && (
-                        <div>
+                        <div class="row">
                             {original && (
+                                <div class="col-sm mt-3">
                                 <Button label="Un-retweet" handleClick={unretweet} />
+                                </div>
                             )}
                             {!original && (
-                                <div>
-                                    <Button label="Delete" handleClick={deletePage} />
-                                    <Button label="Edit" handleClick={editPost} />
+                                <div class="row mt-3">
+                                    <div class ="col-sm me-3">
+                                        <Button label="Delete" handleClick={deletePage}  />
+                                    </div>
+                                    <div class ="col-sm me-3">
+                                        <Button label="Edit" handleClick={editPost} />
+                                    </div>
                                 </div>
                             )}
                         </div>
                     )}
                     {(currentUser) &&
-                        <div>
+                        <div class="row">
                             {!userFave && (
-                                <Button label="Favorite" handleClick={favorite} />
+                                <Button label="Favorite" handleClick={favorite} class="col-sm mt-3"/>
                             )}
 
                             {userFave && (
-                                <Button label="Unfavorite" handleClick={unfavorite} />
+                                <Button label="Unfavorite" handleClick={unfavorite} class="col-sm mt-3"/>
                             )}
 
                             {retweeted && (
-                                <Button label="Un-retweet" handleClick={unretweet} />
+                                <Button label="Un-retweet" handleClick={unretweet} class="col-sm mt-3"/>
                             )}
 
                             {!retweeted && (
-                                <Button label="Retweet" handleClick={retweet} />
+                                <Button label="Retweet" handleClick={retweet} class="col-sm mt-3"/>
                             )}
                         </div>
                     }
                    
-                    <div>
-                        favorites: {favorites}
+                    <div class="mt-3">
+                        <div>Favorites: {favorites}</div>
                        {retweeted && (
                         <div>Retweets: {numretweet}</div>
-                    )}
+                        )}
                     </div>
                     
                     
                 </div>)}
                 
-                <Link to={{
+                <Link 
+                    to={{
                         pathname: `/reply/${postInfo._id}`,
                         state: postInfo._id
                     }} 
-                    className="nav-link" 
                     onClick={reply}
-                    >{postInfo.replies.length} Replies</Link>
+                >
+                        {postInfo.replies.length} Replies
+                </Link>
                     
 
         </div>
