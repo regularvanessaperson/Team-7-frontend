@@ -74,14 +74,16 @@ const Searchbar = () => {
     }
 
     return (
-        <div>
-        <form onSubmit={handleSearch}>
-            <label>
-            Search:
-            <input type="text" value={search} onChange={onChangeSearch} />
-            </label>
-            <input type="submit" value="Submit" />
-        </form>
+        <>
+        <div class="d-inline-flex p-2">
+            
+                    <form onSubmit={handleSearch}>
+                        <input type="text" class="form-control" value={search} onChange={onChangeSearch} placeholder="search..."/>
+                        <button class="btn btn-primary" type="submit">Search</button>
+                        {/* <input type="submit" value="Submit" /> */}
+                    </form>    
+        </div>
+        
         <ul>
             {users.map(result => {
                 let urlId = '/userProfile/' + result._id
@@ -95,8 +97,7 @@ const Searchbar = () => {
             })
         }
         {/* <Post post={posts[0]}/> */}
-        
-        </div>
+        </>
     )
 }
 
