@@ -11,7 +11,7 @@ const Reply = () => {
     const {idx}= useParams()
     const [mainPost, setMainPost] = useState([])
     const [repliesArray, setRepliesArray] = useState([])
-    // console.log("viewOnePost",viewOnePost(idx))
+
    console.log("idx", idx)
    
 
