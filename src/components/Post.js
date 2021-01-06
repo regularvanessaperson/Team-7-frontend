@@ -12,7 +12,7 @@ import { getUserProfile } from '../services/user.service.js'
 
 
 const Post = (props) => {
-
+ console.log("prop prop", props)
     const [follows, setFollows] = useState(null)
     const [exists, setExists] = useState(true)
     const [favorites, setFavorites] = useState(0)
@@ -104,6 +104,9 @@ const Post = (props) => {
         }
     }
 
+    const reply = () => {
+        setExists(true)
+    }
     let urlId = '/userProfile/' + postInfo.creator[0]._id
 
 
@@ -173,7 +176,10 @@ const Post = (props) => {
                 <Link to={{
                         pathname: `/reply/${postInfo._id}`,
                         state: postInfo._id
-                    }} className="nav-link">{postInfo.replies.length} Replies</Link>
+                    }} 
+                    className="nav-link" 
+                    onClick={reply}
+                    >{postInfo.replies.length} Replies</Link>
                     
 
         </div>

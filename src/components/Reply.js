@@ -11,19 +11,20 @@ const Reply = () => {
     const {idx}= useParams()
     const [mainPost, setMainPost] = useState([])
     const [repliesArray, setRepliesArray] = useState([])
-    // console.log("viewOnePost",viewOnePost(idx))
+
    console.log("idx", idx)
-    
+   
 
    const getParentPost =() => {
      viewOnePost(idx)
     .then((response) => {
         const parentPost = response.data.map(post =>{
             console.log("parent response", post)
-            return <Post key={post._id} post={post} />
+            return <Post key={post._id} post={post}  />
         })
         
         setMainPost(parentPost)
+        console.log ("main post creator", mainPost.creator) 
     })
    
 }  
@@ -63,6 +64,7 @@ const getRepliesArray = () => {
         <PostForm parentPost={idx} />
         <div>
             <h2>Replies</h2>
+
             {repliesArray}
         </div>
         
