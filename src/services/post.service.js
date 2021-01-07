@@ -67,6 +67,7 @@ export const unretweetPost = (
     parentId,
     repostId
 ) => {
+    console.log('userId:', userId, 'parentId:', parentId, 'repostId:', repostId)
     return axios
     .put(API_URL+"unretweet", {
         userId,

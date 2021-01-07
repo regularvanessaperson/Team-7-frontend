@@ -77,6 +77,7 @@ const Post = (props) => {
     }
 
     const unretweet = async () => {
+        console.log('postInfo: ', postInfo)
         await unretweetPost(currentUser.id, postInfo.parentPost, postInfo._id)
         setNumretweet(numretweet - 1)
         setRepost(false)
@@ -180,6 +181,7 @@ const Post = (props) => {
                     </div>)}
                 <div >
                 <div class="container .ps-2">
+                    {exists && (
                     <div className="card-body row  p-0">
                         <div className="col-sm p-2">Favorites: {favorites}</div>
                         {retweeted && (
@@ -197,6 +199,7 @@ const Post = (props) => {
                         </Link>
                         </div>
                     </div>
+                    )}
                     </div>
                 </div>
 
