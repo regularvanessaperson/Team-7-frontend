@@ -44,17 +44,20 @@ const Post = (props) => {
         } else {
             setUserFave(false)
         }
-        if (currentUser && postInfo.repostedBy.includes(currentUser.id)) {
+        if (currentUser && postInfo.wasRepostedBy.includes(currentUser.id)) {
             setRetweeted(true)
         }
         else {
             setRetweeted(false)
         }
+        if (currentUser && postInfo.repostedBy.includes(currentUser.id)){
+            setDisable(true)
+        }
         if (currentUser && postInfo.isRepost) {
             setOriginal(postInfo.originalCreator)
             setRepost(true)
         }
-        let retweets = postInfo.repostedBy.length
+        let retweets = postInfo.reposts
         setNumretweet(retweets)
         let numFaves = postInfo.favorites
         setFavorites(numFaves)
