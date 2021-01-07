@@ -26,6 +26,8 @@ const Post = (props) => {
     const [repost, setRepost] = useState(false)
     // Number of retweets a post has
     const [numretweet, setNumretweet] = useState(0)
+    // remove retweet button on click
+    const [disable, setDisable] = useState(false)
 
     const currentUser = getCurrentUser()
     let postInfo = props.post
@@ -72,7 +74,8 @@ const Post = (props) => {
     const retweet = async () => {
         await retweetPost(currentUser.id, postInfo.body, postInfo.hashtags, postInfo._id, postInfo.creator[0].username)
         setNumretweet(numretweet + 1)
-        setRetweeted(true)
+        setDisable(true)
+        // setRetweeted(true)
         // props.rerenderHome()
     }
 
@@ -152,7 +155,7 @@ const Post = (props) => {
                                             <Button label="Un-retweet" className="btn btn-primary" handleClick={unretweet} />
                                         )}
 
-                                        {!retweeted && (
+                                        {(!retweeted && !disable) && (
                                             <Button label="Retweet" className="btn btn-primary" handleClick={retweet} />
                                         )}
                                     </div>
