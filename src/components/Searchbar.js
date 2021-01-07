@@ -53,17 +53,18 @@ const Searchbar = () => {
                 //simple search, attempt to match full word regardless of case
                 // response.data.forEach(post => {
                 const postResults = response.data;
+                let currentPosts = posts
                 postResults.forEach((post) => {
                 if (post.body) {
                     let postArr = post.body.split(" ");
                     for (let i = 0; i < postArr.length; i++) {
                     if ((search.toUpperCase() === postArr[i].toUpperCase()) && !text) {
                         //render a Post component if it passes the search
-                        let currentPosts = posts
                         currentPosts.push(post)
-                        setPosts(currentPosts)
                     }
                     }
+                    setPosts(currentPosts)
+
                 }
                 
                 });
