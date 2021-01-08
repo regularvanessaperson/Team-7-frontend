@@ -41,3 +41,32 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.little-pic {
+  width: 65px;
+  height: 60px;
+  float: left;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: 65px;
+}
+
+.login-bird {
+  width: 60px;
+  height: 70px;
+  font-size: 100px;
+  margin: auto;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}

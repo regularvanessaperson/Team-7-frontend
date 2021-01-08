@@ -9,7 +9,7 @@ import EditPost from './EditPost'
 //import services
 import { deletePost, replyToPost, incrementFavorite, decreaseFavorite, retweetPost, unretweetPost } from '../services/post.service.js'
 import { getUserProfile } from '../services/user.service.js'
-
+import { uploadImage } from '../services/user.service.js'
 
 const Post = (props) => {
     console.log("prop prop", props)
@@ -114,6 +114,15 @@ const Post = (props) => {
     const reply = () => {
         setExists(true)
     }
+
+    let base64EncodedImage = ''
+    if (postInfo.creator && postInfo.creator.length > 0 
+        && postInfo.creator[0].profilePic !== undefined && postInfo.creator[0].profilePic.length > 0
+        ) {
+        base64EncodedImage = Buffer.from(postInfo.creator[0].profilePic[0].img.data.data).toString('base64')
+    }
+    const imageSrc = `data:image/jpeg;base64, ${base64EncodedImage}`
+
     let urlId = '/userProfile/' + postInfo.creator[0]._id
 
 
@@ -138,13 +147,23 @@ const Post = (props) => {
                         )}
                         <div className="card-body">
                             <div className="card-title">
-                                <Link to={urlId}>
-                                    <div>{postInfo.creator[0].username}</div>
-                                </Link>
+                            <Link to={urlId}>
+                                    {postInfo.creator[0].username}
+                            </Link>
+                            {base64EncodedImage &&
+                                (<img id="imagePlaceholder" src={imageSrc} className="little-pic" />)}
+                            {base64EncodedImage === '' &&
+                                (<img
+                                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                                    alt=" profile-img img-thumbnail"
+                                    className="little-pic"
+                                />)}
+ 
                             </div>
+                            
                             <p className="card-text">{postInfo.body}</p>
 
-                            <div className="row">
+                            <div className="row ps-4">
                                 {(currentUser) &&
                                     <div >
                                         {!userFave && (
