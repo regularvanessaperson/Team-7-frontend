@@ -29,7 +29,10 @@ const Home = (props) => {
     console.log("RERENDER HOME", posts)
     
     const postsFeed = posts.reverse().map((post, index) => {
-        return <Post key={post.id} post={post} rerenderHome={rerenderHome} />    
+        if (post.isReply === false){
+            return <Post key={post.id} post={post} rerenderHome={rerenderHome} />  
+        }
+          
     })
 
     return <div>

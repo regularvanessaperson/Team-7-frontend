@@ -57,3 +57,16 @@ export const all = () => {
     return axios
     .get(API_URL+"user/all")
 }
+
+//Post new profilePic
+export const uploadImage = ( userId, profilePic) => {
+    console.log("profilePic possibly in axios", profilePic)
+    let formData = new FormData()
+    formData.append("profilePic", profilePic, profilePic.name)
+    formData.append("userId", userId)
+    console.log("formData", formData)
+    return axios.post(API_URL + 'photo', 
+        formData
+    )
+    
+}

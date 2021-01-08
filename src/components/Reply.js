@@ -18,18 +18,17 @@ const Reply = () => {
    console.log("idx", idx)
    
 
-   const getParentPost =() => {
+   const getParentPost = () => {
      viewOnePost(idx)
     .then((response) => {
         const parentPost = response.data.map(post =>{
-            const parentUser = getCurrentUser(post.creator)
+           const parentUser = getCurrentUser(post.creator)
             setMainPostUser(parentUser)
-            console.log("parent response", mainPostUser)
             return <Post key={post._id} post={post}  />
         })
         
         setMainPost(parentPost)
-        console.log ("main post creator", mainPost) 
+        
     })
    
 }  
