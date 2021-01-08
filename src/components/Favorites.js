@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 //Component imports
-import Button from './common/Button'
-import EditPost from './EditPost'
 import Post from "./Post"
 //Helper
 import { viewFavoritePosts } from '../services/post.service'
@@ -26,19 +24,19 @@ const Favorites = () => {
         viewFavoritePosts(id).then(user => {
             let favesArray = user.data.favoritePosts
             setFavorites(favesArray)
-            console.log(favesArray)
+            // console.log(favesArray)
             return favesArray
             
         })
     }
     const postsFeed = favorites.reverse().map((posts, index) => {
-        return <Post post={posts} favoritesComponent={true} />    
+        return <Post key={posts.id} post={posts} favoritesComponent={true} />    
     })
 
 
     return (
             <div>
-                <h1>Favorites</h1>
+                <h1 className="center-top">Favorites</h1>
                 
               <div>{postsFeed}</div>  
 

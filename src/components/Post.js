@@ -12,7 +12,7 @@ import { getUserProfile } from '../services/user.service.js'
 import { uploadImage } from '../services/user.service.js'
 
 const Post = (props) => {
-    console.log("prop prop", props)
+    
     const [follows, setFollows] = useState(null)
     const [exists, setExists] = useState(true)
     const [favorites, setFavorites] = useState(0)
@@ -175,11 +175,11 @@ const Post = (props) => {
                                         )}
 
                                         {retweeted && (
-                                            <Button label="Un-retweet" className="btn btn-primary" handleClick={unretweet} />
+                                            <Button label="Un-repost" className="btn btn-primary" handleClick={unretweet} />
                                         )}
 
                                         {(!retweeted && !disable) && (
-                                            <Button label="Retweet" className="btn btn-primary" handleClick={retweet} />
+                                            <Button label="Repost" className="btn btn-primary" handleClick={retweet} />
                                         )}
                                     </div>
                                 }
@@ -205,12 +205,12 @@ const Post = (props) => {
 
                     </div>)}
                 <div >
-                <div class="container .ps-2">
+                <div className="container .ps-2">
                     {exists && (
                     <div className="card-body row  p-0">
                         <div className="col-sm p-2">Favorites: {favorites}</div>
                         {retweeted && (
-                            <div className="col-sm p-2">Retweets: {numretweet}</div>
+                            <div className="col-sm p-2">Reposts: {numretweet}</div>
                         )}
                         <div className="col-sm p-2">
                         <Link

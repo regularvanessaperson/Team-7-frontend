@@ -62,12 +62,12 @@ const getRepliesArray = () => {
         <div>
             
         <div>
-            <h2>Main Post</h2>
+            <h2 className="center-top">Main Post</h2>
             {mainPost}
         </div>
         <PostForm parentPost={idx} />
         <div>
-            <h2>Replies</h2>
+            <h2 className="center-top">Replies</h2>
 
             {repliesArray}
         </div>

@@ -5,7 +5,7 @@ import { getCurrentUser } from '../services/auth.service.js'
 //import service displaying posts from users a user follows
 import { viewFollowedPosts } from '../services/post.service.js'
 //import spinner
-import ButtonSpinner from './common/ButtonSpinner'
+
 
 const Following = () => {
     const [numberOfPosts, setNumberOfPosts] = useState(0)
@@ -36,7 +36,7 @@ const Following = () => {
     }
     const followingFeed = following.reverse().map((follower, index) => {
        return follower.posts.map((post, index) => {
-            return <Post post={post} />    
+            return <Post key={post.id} post={post} />    
         })
         
     })
@@ -44,11 +44,11 @@ const Following = () => {
       return (
         <>
         <div>
-            <h1>Following Feed</h1>
+            <h1 className="center-top">Following Feed</h1>
+            <small className="center-top text-muted"> {numberOfPosts} posts from users you follow </small>
         </div>
         <div>
-            Feed goes here
-            Number of posts: {numberOfPosts}
+        
             {followingFeed}
         </div>
         </>

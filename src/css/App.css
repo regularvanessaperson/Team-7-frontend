@@ -70,3 +70,8 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.center-top {
+  text-align: center;
+  display: block;
+}

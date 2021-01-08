@@ -62,11 +62,11 @@ const UserProfile = (props) => {
     function userProfile() {
         return getUserProfile(id).then(user => {
             const userInfo = user.data
-            console.log("Ids: ", userInfo._id, currentUser.id)
+            // console.log("Ids: ", userInfo._id, currentUser.id)
             if (userInfo._id === currentUser.id) {
                 setCurrent(true)
             }
-            console.log(user)
+            // console.log(user)
             let base64EncodedImage = ''
             if (user.data.profilePic !== undefined && user.data.profilePic.length > 0) {
                 base64EncodedImage = Buffer.from(user.data.profilePic[0].img.data.data).toString('base64')
@@ -78,7 +78,7 @@ const UserProfile = (props) => {
 
                     <div className="card">
                         <div>
-                            <h2 className="nav-link">
+                            <h2 className="center-top nav-link">
                                 <strong>User Information</strong>
                             </h2>
                             <h3>
@@ -131,7 +131,7 @@ const UserProfile = (props) => {
 
                             } else {
                                 return <ul className="list-unstyled">
-                                    <li className="nav-link" key={index}>{followed.username}</li>
+                                    <li className="nav-link" key={followed._id}>{followed.username}</li>
                                     {/* return <Post post={post} /> */}
                                 </ul>
 
@@ -150,7 +150,7 @@ const UserProfile = (props) => {
                             } else {
                                 return <div>
                                     <ul className="list-unstyled">
-                                        <li className="nav-link" key={index}>{followers.username}</li>
+                                        <li className="nav-link" key={followers._id}>{followers.username}</li>
                                         {/* // return <Post post={post} /> */}
                                     </ul>
                                 </div>
@@ -164,7 +164,7 @@ const UserProfile = (props) => {
 
                         {userInfo.posts.map((post, index) => {
                             {/* {console.log(post)} */ }
-                            return <Post post={post} />
+                            return <Post key={post.id} post={post} />
 
 
                         })}

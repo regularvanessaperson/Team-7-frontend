@@ -17,7 +17,7 @@ const Home = (props) => {
         viewAllPosts().
         then((response) => {
             setPosts(response.data)
-            console.log(response)
+            // console.log(response)
         }).catch(err => {
             console.log(err)
         })
@@ -26,7 +26,7 @@ const Home = (props) => {
     const rerenderHome = () => {
         setUpdate(update+1)
     }
-    console.log("RERENDER HOME", posts)
+    
     
     const postsFeed = posts.reverse().map((post, index) => {
         if (post.isReply === false){
@@ -36,7 +36,7 @@ const Home = (props) => {
     })
 
     return <div>
-        <h1>Home Page</h1>
+        <h1 className="center-top">Home Page</h1>
         <PostForm />
         <Searchbar />
         {postsFeed}

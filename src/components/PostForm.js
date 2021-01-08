@@ -35,9 +35,9 @@ const PostForm = (props) => {
         <div>
         {currentUser && (
             <form onSubmit={handlePost}>
-                <div class="w-60">
-                    <textarea class="form-control" value={post} onChange={onChangePost} rows="3" placeholder="Write a post..."></textarea>
-                    <button class="btn btn-primary" type="submit" value="Submit"><i class="fas fa-pen"></i></button>
+                <div className="w-60">
+                    <textarea className="form-control" value={post} onChange={onChangePost} rows="3" placeholder="Write a post..."></textarea>
+                    <button className="btn btn-primary" type="submit" value="Submit"><i className="fas fa-pen"></i></button>
                     {/* <input type="submit" value="Submit" /> */}
                 </div>
             {/* Write a post:

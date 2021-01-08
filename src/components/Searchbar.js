@@ -6,7 +6,7 @@ import {all} from '../services/user.service.js'
 
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-const axios = require('axios')
+
 
 
 
@@ -77,10 +77,10 @@ const Searchbar = () => {
     return (
         <>
             
-                    <form class="d-inline" onSubmit={handleSearch}>
-                        <div class="d-flex w-50">
-                            <input type="text" class="form-control" value={search} onChange={onChangeSearch} placeholder="search..."/>
-                            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    <form className="d-inline" onSubmit={handleSearch}>
+                        <div className="d-flex w-50">
+                            <input type="text" className="form-control" value={search} onChange={onChangeSearch} placeholder="Search Chirper"/>
+                            <button className="btn btn-primary" type="submit"><i className="fas fa-search"></i></button>
                         </div>
                         {/* <input type="submit" value="Submit" /> */}
                     </form>    
@@ -94,7 +94,7 @@ const Searchbar = () => {
         {
             posts.map((post) => {
                 console.log(post)
-                return <Post post={post} />
+                return <Post key={post.id} post={post} />
             })
         }
         {/* <Post post={posts[0]}/> */}

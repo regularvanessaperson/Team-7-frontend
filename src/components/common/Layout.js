@@ -29,7 +29,7 @@ const Layout = (props) => {
   let profUrl = null
 
   if (currentUser){
-    console.log('/userProfile/' + currentUser.id)
+    // console.log('/userProfile/' + currentUser.id)
     profUrl = '/userProfile/' + currentUser.id
   }
 
@@ -37,7 +37,7 @@ const Layout = (props) => {
     <div>
       <nav className="navbar navbar-expand sticky-top navbar-dark bg-primary">
         <Link to="/" className="navbar-brand">
-          Chirper
+        <strong>Chirper</strong>  
         </Link>
         <div className="navbar-nav nav-tabs mr-auto">
           <li className="nav-item">
@@ -69,7 +69,7 @@ const Layout = (props) => {
           {currentUser && (
             <li className="nav-item">
               <Link to={profUrl} className="nav-link">
-                UserProfile
+               {currentUser.username}'s Profile
               </Link>
             </li>
           )}
@@ -77,11 +77,11 @@ const Layout = (props) => {
         
         {currentUser ? (
           <div className="navbar-nav ml-auto">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
                 {currentUser.username}
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={logOut}>
                   Logout

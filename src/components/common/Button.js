@@ -4,9 +4,9 @@ const Button = (props) => {
     let passingProps = props.label 
     
     if(passingProps === 'Edit'){
-        passingProps = <i class="fas fa-edit"></i> 
+        passingProps = <i className="fas fa-edit"></i> 
     }else if(passingProps === 'Delete'){
-        passingProps = <i class="fas fa-trash"></i>
+        passingProps = <i className="fas fa-trash"></i>
     }
 
     
