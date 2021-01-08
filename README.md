@@ -13,7 +13,7 @@ Link to come
 [Here](https://github.com/SFX818/Team-7-backend) is a link to our backend repo
 
 # Wireframes
-To come
+![Wireframes](images/Wireframe_Board.png)
 
 # User Stories
 | As a user, I want to be able to...|
@@ -26,6 +26,7 @@ To come
 |Reply to posts|
 |View a feed of all posts|
 |View a feed of posts from users I follow|
+|View other user profiles|
 |View my favorited posts|
 |Search for topics (hashtags)|
 
@@ -35,6 +36,29 @@ To come
 
 ## Architecture
 - React: building our fronted with the React library allows us to break our app down into reusable components, and helps us create a more user friendly experience because we are able to re-render only components whose state has changed without re-rendering other components.
+
+```
+App
+|
+|--Home
+|  |--Post(s)
+|  |   |--Replies
+|  |
+|  |--Searchbar
+|  |
+|  |--PostForm
+|
+|--Following
+|  |--Post(s)
+|
+|--Favorites
+|  |--Post(s)
+|
+|--UserProfile
+|  |--Post(s)
+      |--Following
+
+```
 
 ## Styling
 - Bootstrap
