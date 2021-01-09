@@ -1,10 +1,10 @@
 import React from 'react'
-import {getCurrentUser} from '../services/auth.service'
+import { getCurrentUser } from '../services/auth.service'
 
-const Profile = () =>{
+const Profile = () => {
     const currentUser = getCurrentUser()
-    console.log(currentUser)
-    return(
+
+    return (
         <div className="container">
             <header className="jumbotron">
                 <h3>
@@ -12,7 +12,7 @@ const Profile = () =>{
                 </h3>
             </header>
             <p>
-                <strong>Token:</strong>{currentUser.accessToken.substring(0,20)}...{" "}
+                <strong>Token:</strong>{currentUser.accessToken.substring(0, 20)}...{" "}
             </p>
             <p>
                 <strong>Id: </strong>{currentUser.id}
@@ -22,7 +22,7 @@ const Profile = () =>{
             </p>
             {/* if current user has roles map through those roles */}
             {currentUser.roles &&
-            currentUser.roles.map((role, index)=> <li key={index}>{role}</li>)
+                currentUser.roles.map((role, index) => <li key={index}>{role}</li>)
             }
         </div>
     )

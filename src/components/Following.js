@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Post from "./Post"
 //import getCurrentUser to grab user ID
 import { getCurrentUser } from '../services/auth.service.js'
@@ -13,7 +13,7 @@ const Following = () => {
     const [exists, setExists] = useState(true)
     const currentUser = getCurrentUser()
     const id = currentUser.id
-    
+
 
     useEffect(() => {
         followingPosts()
@@ -21,7 +21,7 @@ const Following = () => {
     }, [])
 
 
-     const followingPosts = () => {
+    const followingPosts = () => {
         viewFollowedPosts(id).then(user => {
             let followArray = user.data.followed
             setFollowing(followArray)
@@ -31,26 +31,26 @@ const Following = () => {
             })
             setNumberOfPosts(totalPosts)
             return followArray
-            
+
         })
     }
     const followingFeed = following.reverse().map((follower, index) => {
-       return follower.posts.map((post, index) => {
-            return <Post key={post.id} post={post} />    
+        return follower.posts.map((post, index) => {
+            return <Post key={post.id} post={post} />
         })
-        
+
     })
 
-      return (
+    return (
         <>
-        <div>
-            <h1 className="center-top">Following Feed</h1>
-            <small className="center-top text-muted"> {numberOfPosts} posts from users you follow </small>
-        </div>
-        <div>
-        
-            {followingFeed}
-        </div>
+            <div>
+                <h1 className="center-top">Following Feed</h1>
+                <small className="center-top text-muted"> {numberOfPosts} posts from users you follow </small>
+            </div>
+            <div>
+
+                {followingFeed}
+            </div>
         </>
     )
 

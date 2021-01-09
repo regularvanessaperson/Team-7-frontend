@@ -9,7 +9,7 @@ import ButtonSpinner from './common/ButtonSpinner'
 
 //Helper
 import { login } from '../services/auth.service'
-import {resMessage} from '../utilities/functions.utilities'
+import { resMessage } from '../utilities/functions.utilities'
 
 
 const required = (value) => {
@@ -39,12 +39,12 @@ const Login = (props) => {
         setUsername(username)
     }
 
-    //Store teh password in our password state
+    //Store the password in our password state
     const onChangePassword = (e) => {
         const password = e.target.value
         setPassword(password)
     }
-    
+
     const handleLogin = (e) => {
         e.preventDefault()
 
@@ -53,7 +53,7 @@ const Login = (props) => {
         //validates all the fields
         form.current.validateAll()
         //validator stores errors and we can check if errors exist
-        if(checkBtn.current.context._errors.length === 0){
+        if (checkBtn.current.context._errors.length === 0) {
             login(username, password).then(
                 () => {
                     props.history.push("/home")
@@ -66,21 +66,16 @@ const Login = (props) => {
                     setMessage(resMessage(error))
                 }
             )
-        }else {
+        } else {
             setLoading(false)
         }
 
     }
 
-    console.log(username, password)
     return (
         <div className="col-md-12">
             <div className="card card-container">
-                 <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                    alt="profile-img"
-                    className="profile-img-card"
-                />  
+
                 <Form onSubmit={handleLogin} ref={form}>
                     <FormGroup text="username">
                         <Input

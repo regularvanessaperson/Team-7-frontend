@@ -20,29 +20,29 @@ const Favorites = () => {
     }, [])
 
 
-     const favePosts = () => {
+    const favePosts = () => {
         viewFavoritePosts(id).then(user => {
             let favesArray = user.data.favoritePosts
             setFavorites(favesArray)
             // console.log(favesArray)
             return favesArray
-            
+
         })
     }
     const postsFeed = favorites.reverse().map((posts, index) => {
-        return <Post key={posts.id} post={posts} favoritesComponent={true} />    
+        return <Post key={posts.id} post={posts} favoritesComponent={true} />
     })
 
 
     return (
-            <div>
-                <h1 className="center-top">Favorites</h1>
-                
-              <div>{postsFeed}</div>  
+        <div>
+            <h1 className="center-top">Favorites</h1>
 
-            </div>
-        )
+            <div>{postsFeed}</div>
 
-    }
+        </div>
+    )
 
-    export default Favorites
+}
+
+export default Favorites

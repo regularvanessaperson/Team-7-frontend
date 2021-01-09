@@ -3,8 +3,8 @@ The core functionality of our app is a user's ability to make posts and interact
 
 In terms of building the app, we focused our energies on building the backend first and then building connections from the frontend to the backend. In short, we had to translate the key functionalities we identified in the planning stage into code and define how these functionalities interacted with our backend.
 
-# Screenshot of Landing Page
-To come
+# Landing page after user logs in
+![Home](images/HomePage.png)
 
 # Link to Deployed App
 Link to come
@@ -69,6 +69,6 @@ App
 
 # Problems/Challenges
 - We ran into an issue rendering posts for users a user follows because our data from the backend initially required iterating through a nested array. This resulted in posts displaying from a single user but broke when a user followed multiple users. This was ultimately resolved by reconfiguring a route on the backend and made our code more efficient because it cut out the need for an extra API call and subsequent nested array that came with it.
-
+- Since we did reuse our post component in every page that rendered current and other user's code there was a difference in how every object came through from the backend depending on how we set it up. At first we had to make promises to access the information we needed but ended up populating much of the backend so we could use in the frontend easily.
 
 
