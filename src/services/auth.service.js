@@ -3,6 +3,7 @@ import axios from 'axios';
 import {setItem, getItem, removeItem} from '../utilities/localStorage.utilities'
 
 const API_URL=process.env.REACT_APP_BACKEND_URL
+console.log(API_URL)
 //function to register User
 export const register =(username, email, password) => {
     return axios
