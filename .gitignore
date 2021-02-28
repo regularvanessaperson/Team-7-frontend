@@ -1,2 +1,4 @@
 NODE_MODULES
 .eslintcache
+.env.development
+.env.production
