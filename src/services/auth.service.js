@@ -2,11 +2,11 @@ import axios from 'axios';
 
 import {setItem, getItem, removeItem} from '../utilities/localStorage.utilities'
 
-const API_URL="http://localhost:8080/api/auth/"
+const API_URL=process.env.REACT_APP_BACKEND_URL
 //function to register User
 export const register =(username, email, password) => {
     return axios
-    .post(API_URL+"signup", {
+    .post(API_URL+"/api/auth/signup", {
         username,
         email,
         password
@@ -16,7 +16,7 @@ export const register =(username, email, password) => {
 //Login the user
 export const login = (username, password) => {
     return axios
-    .post(API_URL+"signin", {
+    .post(API_URL+"/api/auth/signin", {
         username,
         password
     })
