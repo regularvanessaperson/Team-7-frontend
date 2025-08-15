@@ -1,3 +1,6 @@
+# Chirper
+### *This project needs to be re-deployed somewhere new since Heroku removed free tier*
+
 # Approach/Methodology
 The core functionality of our app is a user's ability to make posts and interact with posts from other users, so we developed our app with this lens. As a result, we quickly identified that giving a user the ability to view their posts and the ability to toggle between a feed of all posts and a feed of posts from users they follow were important components of the app. To facilitate the following feed, we had to give users the ability to follow/unfollow users.
 
